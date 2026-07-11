@@ -446,6 +446,11 @@
     updateBaby();
   }
 
+  // Offline-Modus: Seite nach dem ersten Besuch auch ohne Internet nutzbar
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+
   refresh();
   // Aktualisiert automatisch um Mitternacht bzw. wenn die Seite wieder geöffnet wird
   setInterval(refresh, 60000);

@@ -81,5 +81,11 @@
       <b>„Zum Home-Bildschirm“</b> — dann hast du ein App-Icon 🌸
     </div>
   </div>
+<script>
+  // Offline-Modus: Seiten nach dem ersten Besuch auch ohne Internet nutzbar
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+</script>
 </body>
 </html>

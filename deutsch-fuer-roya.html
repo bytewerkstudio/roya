@@ -884,6 +884,11 @@ function hearts(n) {
 })();
 
 goHome();
+
+// Offline-Modus: App nach dem ersten Besuch auch ohne Internet nutzbar
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+}
 </script>
 
 </body>
