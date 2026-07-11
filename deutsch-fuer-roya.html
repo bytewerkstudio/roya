@@ -891,6 +891,11 @@ goHome();
 // Offline-Modus: App nach dem ersten Besuch auch ohne Internet nutzbar
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(function () {});
+  // Neue Version verfügbar? Seite einmal automatisch neu laden.
+  let swReloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    if (!swReloaded) { swReloaded = true; location.reload(); }
+  });
 }
 </script>
 
