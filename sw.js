@@ -1,7 +1,7 @@
 // Service Worker: macht die Apps offline nutzbar.
 // Strategie: erst Netz versuchen (damit Updates ankommen), bei Fehler aus dem Speicher laden.
-const CACHE = 'roya-apps-v1';
-const FILES = ['./', 'index.html', 'deutsch-fuer-roya.html', 'countdown.html'];
+const CACHE = 'roya-apps-v2';
+const FILES = ['./', 'index.html', 'deutsch-fuer-roya.html', 'countdown.html', 'icon-flower.png', 'icon-heart.png'];
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
