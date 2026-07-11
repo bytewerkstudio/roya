@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff5f8">
+<meta name="apple-mobile-web-app-title" content="Baby 👶">
+<link rel="apple-touch-icon" href="icon-baby.png">
+<link rel="icon" href="icon-baby.png">
+<title>Unser Baby 👶</title>
+<style>
+  :root {
+    --bg1: #faf9f7;
+    --bg2: #fff5f8;
+    --text: #2b2b3a;
+    --soft: rgba(43, 43, 58, 0.62);
+    --softer: rgba(43, 43, 58, 0.42);
+    --accent: #e75a7c;
+    --accent-soft: rgba(231, 90, 124, 0.08);
+    --blue: #3d8fb5;
+    --blue-soft: rgba(61, 143, 181, 0.10);
+    --gold: #c8901f;
+    --card: #ffffff;
+    --card-border: #f0e6ea;
+    --line: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 14px rgba(190, 140, 160, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; overflow-x: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg1);
+    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg1) 70%) fixed;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  #wrap {
+    position: relative; z-index: 1; max-width: 430px; margin: 0 auto;
+    padding: calc(env(safe-area-inset-top) + 14px) 18px calc(env(safe-area-inset-bottom) + 40px);
+  }
+
+  .backrow { margin-bottom: 8px; }
+  .backbtn {
+    display: inline-block; border: 1px solid var(--card-border); background: var(--card);
+    color: var(--text); border-radius: 100px; padding: 8px 16px; font-size: 14px;
+    text-decoration: none; box-shadow: var(--shadow);
+  }
+
+  .brand { text-align: center; margin-bottom: 16px; }
+  .brand h1 {
+    font-family: "Snell Roundhand", "Savoye LET", "Brush Script MT", cursive;
+    font-size: 30px; font-weight: 400; color: var(--accent);
+    text-shadow: 0 1px 12px rgba(231, 90, 124, 0.2);
+  }
+  .brand .ps { font-size: 14px; color: var(--soft); margin-top: 2px; direction: rtl; }
+
+  /* ---------- 3D-Szene ---------- */
+  .scene {
+    position: relative; text-align: center; padding: 26px 16px 22px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 24px;
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .womb {
+    position: relative; width: 210px; height: 210px; margin: 0 auto;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff0f4 0%, #ffdfe8 55%, #f9c7d4 100%);
+    box-shadow: inset 0 -12px 30px rgba(231, 90, 124, 0.18), 0 10px 30px rgba(231, 90, 124, 0.15);
+    display: flex; align-items: center; justify-content: center;
+    perspective: 600px;
+  }
+  .womb::before, .womb::after {
+    content: ""; position: absolute; inset: -12px; border-radius: 50%;
+    border: 2px solid rgba(231, 90, 124, 0.18);
+    animation: pulse 3s ease-out infinite;
+  }
+  .womb::after { animation-delay: 1.5s; }
+  @keyframes pulse {
+    0%   { transform: scale(0.92); opacity: 0.8; }
+    100% { transform: scale(1.15); opacity: 0; }
+  }
+  .fruit {
+    font-size: 96px; line-height: 1;
+    animation: spin3d 7s linear infinite, floaty 3.4s ease-in-out infinite;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 14px 16px rgba(180, 90, 120, 0.35));
+  }
+  @keyframes spin3d { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+  @keyframes floaty { 0%, 100% { margin-top: 0; } 50% { margin-top: -12px; } }
+  .heart-orbit {
+    position: absolute; font-size: 17px; opacity: 0.85;
+    animation: orbit 9s linear infinite;
+  }
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+  }
+  .compare { margin-top: 18px; font-size: 15.5px; font-weight: 600; }
+  .compare .ps { display: block; font-size: 13.5px; color: var(--soft); font-weight: 400; margin-top: 3px; direction: rtl; }
+
+  /* ---------- Statistiken ---------- */
+  .stats { display: flex; gap: 8px; margin-top: 12px; }
+  .stat {
+    flex: 1; text-align: center; padding: 13px 4px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .stat .v { font-size: 19px; font-weight: 700; color: var(--accent); }
+  .stat .v small { font-size: 12px; font-weight: 600; }
+  .stat .k { font-size: 10.5px; color: var(--softer); margin-top: 3px; }
+
+  .today-line {
+    margin-top: 10px; padding: 11px 16px; text-align: center;
+    background: var(--accent-soft); border: 1px solid rgba(231, 90, 124, 0.2);
+    border-radius: 14px; font-size: 13.5px; color: var(--accent); font-weight: 600;
+  }
+  .today-line .ps { display: block; font-weight: 400; font-size: 12.5px; margin-top: 2px; direction: rtl; }
+
+  /* ---------- Fortschrittsring ---------- */
+  .ringbox {
+    display: flex; align-items: center; gap: 16px; margin-top: 12px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 16px; box-shadow: var(--shadow);
+  }
+  .ring {
+    width: 92px; height: 92px; border-radius: 50%; flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center; position: relative;
+  }
+  .ring .inner {
+    width: 72px; height: 72px; border-radius: 50%; background: var(--card);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .ring .pct { font-size: 17px; font-weight: 700; color: var(--accent); }
+  .ring .lbl { font-size: 9px; color: var(--softer); }
+  .ringtext { font-size: 13.5px; color: var(--soft); line-height: 1.65; }
+  .ringtext b { color: var(--text); }
+  .ringtext .ps { direction: rtl; display: block; text-align: right; }
+
+  /* ---------- Wochen-Entdecker ---------- */
+  .explorer {
+    margin-top: 12px; background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 18px; box-shadow: var(--shadow);
+  }
+  .exp-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .exp-head b { font-size: 15px; }
+  .exp-head button {
+    border: 1px solid rgba(231, 90, 124, 0.35); background: var(--accent-soft); color: var(--accent);
+    border-radius: 100px; padding: 6px 14px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  input[type=range] {
+    width: 100%; margin: 10px 0 4px; accent-color: var(--accent);
+  }
+  .exp-week { text-align: center; font-size: 13px; color: var(--softer); margin-bottom: 10px; }
+  .exp-card { display: flex; align-items: center; gap: 14px; }
+  .exp-fruit { font-size: 52px; flex: 0 0 auto; filter: drop-shadow(0 6px 8px rgba(180, 90, 120, 0.25)); }
+  .exp-data { font-size: 13.5px; color: var(--soft); line-height: 1.7; }
+  .exp-data b { color: var(--text); }
+  .exp-text {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);
+    font-size: 14px; line-height: 1.7;
+  }
+  .exp-text .ps { display: block; direction: rtl; text-align: right; color: var(--soft); margin-top: 5px; }
+
+  .footnote { text-align: center; font-size: 11.5px; color: var(--softer); margin-top: 22px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  <div class="backrow"><a class="backbtn" href="index.html">‹ Roya</a></div>
+
+  <div class="brand">
+    <h1>Unser Baby</h1>
+    <div class="ps">زموږ کوچنۍ معجزه — ورځ په ورځ وده کوي 🤍</div>
+  </div>
+
+  <section class="scene">
+    <div class="womb">
+      <span class="heart-orbit">🤍</span>
+      <div class="fruit" id="fruit">🍈</div>
+    </div>
+    <div class="compare" id="compare">
+      So groß wie eine Honigmelone
+      <span class="ps" id="comparePs"></span>
+    </div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="v" id="sswV">–</div><div class="k">SSW · اونۍ</div></div>
+    <div class="stat"><div class="v" id="kgV">–</div><div class="k">Gewicht · وزن</div></div>
+    <div class="stat"><div class="v" id="cmV">–</div><div class="k">Größe · قد</div></div>
+  </div>
+
+  <div class="today-line" id="todayLine"></div>
+
+  <div class="ringbox">
+    <div class="ring" id="ring">
+      <div class="inner">
+        <div class="pct" id="ringPct">–</div>
+        <div class="lbl">von 40 Wo.</div>
+      </div>
+    </div>
+    <div class="ringtext" id="ringText"></div>
+  </div>
+
+  <section class="explorer">
+    <div class="exp-head">
+      <b>🗓 Woche für Woche</b>
+      <button onclick="jumpToday()">📍 Heute · نن</button>
+    </div>
+    <input type="range" id="slider" min="4" max="42" value="32" oninput="showWeek(+this.value)">
+    <div class="exp-week" id="expWeek"></div>
+    <div class="exp-card">
+      <div class="exp-fruit" id="expFruit">🍈</div>
+      <div class="exp-data" id="expData"></div>
+    </div>
+    <div class="exp-text" id="expText"></div>
+  </section>
+
+  <div class="footnote">
+    Durchschnittswerte — jedes Baby wächst in seinem eigenen Tempo 🤍<br>
+    <span style="direction:rtl">دا منځني ارقام دي — هر ماشوم په خپل رفتار وده کوي</span>
+  </div>
+</div>
+
+<script>
+/* Errechneter Geburtstermin (ET) — hier anpassen, falls anders! */
+const DUE = new Date(2026, 8, 9);
+const MS_DAY = 86400000;
+const PREG_DAYS = 280;
+
+/* Woche: Größe (cm, ab SSW 20 Scheitel–Ferse), Gewicht (g), Vergleich, Info DE/PS */
+const W = {
+ 4:{cm:0.1,g:1,f:'⚪',v:'ein Mohnkorn',vp:'د کوکنارو دانه',de:'Winzig klein — das Herz beginnt sich zu bilden.',ps:'ډېر کوچنی — زړه یې جوړېدل پیلوي.'},
+ 5:{cm:0.2,g:1,f:'🌱',v:'ein Sesamkorn',vp:'د کنځلو دانه',de:'Das kleine Herz beginnt zu schlagen!',ps:'کوچنی زړه یې درزېدل پیلوي!'},
+ 6:{cm:0.5,g:1,f:'🫘',v:'eine Linse',vp:'دال',de:'Ärmchen und Beinchen entstehen.',ps:'لاسونه او پښې یې جوړېږي.'},
+ 7:{cm:1,g:2,f:'🫐',v:'eine Blaubeere',vp:'کوچنۍ مېوه',de:'Das Gehirn wächst jetzt schnell.',ps:'ماغزه یې ژر وده کوي.'},
+ 8:{cm:1.6,g:3,f:'🍇',v:'eine Weintraube',vp:'انګور',de:'Alle wichtigen Organe sind angelegt.',ps:'ټول مهم غړي یې جوړ شوي.'},
+ 9:{cm:2.3,g:4,f:'🍒',v:'eine Kirsche',vp:'ګیلاس',de:'Kleine Finger entwickeln sich.',ps:'کوچنۍ ګوتې یې جوړېږي.'},
+ 10:{cm:3.1,g:7,f:'🍓',v:'eine Erdbeere',vp:'ځمکنۍ توت',de:'Das Baby kann sich schon bewegen.',ps:'ماشوم اوس خوځېدلی شي.'},
+ 11:{cm:4.1,g:10,f:'🌰',v:'eine Feige',vp:'انځر',de:'Nägel und Haarwurzeln entstehen.',ps:'نوکان او وېښتان یې جوړېږي.'},
+ 12:{cm:5.4,g:14,f:'🍋',v:'eine Limette',vp:'لیمو',de:'Das Baby kann gähnen und schlucken.',ps:'ماشوم اسولۍ کوي او تېروي.'},
+ 13:{cm:7.4,g:25,f:'🍋',v:'eine Zitrone',vp:'لیمو',de:'Die Stimmbänder bilden sich.',ps:'د غږ تارونه یې جوړېږي.'},
+ 14:{cm:8.7,g:45,f:'🍑',v:'ein Pfirsich',vp:'شفتالو',de:'Das Baby macht erste Grimassen.',ps:'ماشوم لومړۍ مخ‌بڼې جوړوي.'},
+ 15:{cm:10.1,g:70,f:'🍎',v:'ein Apfel',vp:'مڼه',de:'Es kann Licht wahrnehmen.',ps:'رڼا احساسولی شي.'},
+ 16:{cm:11.6,g:100,f:'🥑',v:'eine Avocado',vp:'اووکادو',de:'Kleine Bewegungen sind spürbar.',ps:'کوچني حرکتونه یې احساسېدلی شي.'},
+ 17:{cm:13,g:140,f:'🍐',v:'eine Birne',vp:'ناک',de:'Eine Fettschicht beginnt zu wachsen.',ps:'د بدن وازګه یې جوړېدل پیلوي.'},
+ 18:{cm:14.2,g:190,f:'🫑',v:'eine Paprika',vp:'مرچک',de:'Das Baby hört jetzt deine Stimme!',ps:'ماشوم اوس ستا غږ اوري!'},
+ 19:{cm:15.3,g:240,f:'🍅',v:'eine Tomate',vp:'روميان',de:'Eine Schutzschicht umhüllt die Haut.',ps:'پوستکی یې ساتونکې طبقه لري.'},
+ 20:{cm:25.6,g:300,f:'🍌',v:'eine Banane',vp:'کیله',de:'Halbzeit! Das Baby strampelt kräftig.',ps:'نیمايي! ماشوم په زور لغتې وهي.'},
+ 21:{cm:26.7,g:360,f:'🥕',v:'eine Karotte',vp:'ګازره',de:'Es schluckt Fruchtwasser und übt Verdauung.',ps:'اوبه تېروي او هضم تمرینوي.'},
+ 22:{cm:27.8,g:430,f:'🥥',v:'eine Kokosnuss',vp:'ناریال',de:'Das Gesicht ist voll entwickelt.',ps:'مخ یې پوره جوړ شوی.'},
+ 23:{cm:28.9,g:500,f:'🥭',v:'eine Mango',vp:'ام',de:'Es lauscht deinem Herzschlag.',ps:'ستا د زړه درزا اوري.'},
+ 24:{cm:30,g:600,f:'🌽',v:'ein Maiskolben',vp:'جوار',de:'Die Lunge übt das Atmen.',ps:'سږي یې ساه اخیستل تمرینوي.'},
+ 25:{cm:34.6,g:660,f:'🥦',v:'ein Blumenkohl',vp:'ګوپي',de:'Das Baby reagiert auf Berührungen.',ps:'ماشوم لمس ته ځواب ورکوي.'},
+ 26:{cm:35.6,g:760,f:'🥬',v:'ein Salat',vp:'سلاد',de:'Die Augen öffnen sich zum ersten Mal.',ps:'سترګې یې لومړی ځل خلاصېږي.'},
+ 27:{cm:36.6,g:875,f:'🍆',v:'eine Aubergine',vp:'تور بانجان',de:'Es kann jetzt sogar träumen.',ps:'اوس خوبونه هم لیدلی شي.'},
+ 28:{cm:37.6,g:1005,f:'🍈',v:'eine kleine Melone',vp:'کوچنۍ خټکی',de:'Das Baby blinzelt und träumt.',ps:'ماشوم سترګې رپوي او خوبونه ویني.'},
+ 29:{cm:38.6,g:1150,f:'🎃',v:'ein kleiner Kürbis',vp:'کوچنی کدو',de:'Die Knochen werden fester.',ps:'هډوکي یې کلکېږي.'},
+ 30:{cm:39.9,g:1320,f:'🥬',v:'ein Weißkohl',vp:'کرم',de:'Es erkennt deine Stimme genau.',ps:'ستا غږ ښه پېژني.'},
+ 31:{cm:41.1,g:1500,f:'🍍',v:'eine Ananas',vp:'انناس',de:'Alle fünf Sinne funktionieren!',ps:'ټول پنځه حواس یې کار کوي!'},
+ 32:{cm:42.4,g:1700,f:'🍈',v:'eine Honigmelone',vp:'خټکی',de:'Das Baby übt Atmen und nimmt schnell zu.',ps:'ماشوم ساه اخیستل تمرینوي او ژر وزن اخلي.'},
+ 33:{cm:43.7,g:1900,f:'🍍',v:'eine große Ananas',vp:'لوی انناس',de:'Das Köpfchen dreht sich oft nach unten.',ps:'سر یې ډېری وخت ښکته اوړي.'},
+ 34:{cm:45,g:2150,f:'🍈',v:'eine Melone',vp:'خټکی',de:'Die Lunge ist fast reif.',ps:'سږي یې نږدې بشپړ دي.'},
+ 35:{cm:46.2,g:2380,f:'🍈',v:'eine Honigmelone',vp:'خټکی',de:'Es wird kuschelig eng im Bauch.',ps:'په ګېډه کې ځای تنګېږي.'},
+ 36:{cm:47.4,g:2620,f:'🎃',v:'ein Kürbis',vp:'کدو',de:'Das Baby könnte bald bereit sein.',ps:'ماشوم به ژر چمتو وي.'},
+ 37:{cm:48.6,g:2860,f:'🎃',v:'ein Kürbis',vp:'کدو',de:'Ab jetzt gilt das Baby als reif!',ps:'له اوسه ماشوم بشپړ ګڼل کېږي!'},
+ 38:{cm:49.8,g:3080,f:'🎃',v:'ein großer Kürbis',vp:'لوی کدو',de:'Es sammelt Kraft für die Geburt.',ps:'د زېږون لپاره ځواک راټولوي.'},
+ 39:{cm:50.7,g:3290,f:'🍉',v:'eine kleine Wassermelone',vp:'کوچنۍ هندوانه',de:'Jederzeit bereit, dich kennenzulernen!',ps:'هر وخت چمتو دی چې تا وویني!'},
+ 40:{cm:51.2,g:3460,f:'🍉',v:'eine Wassermelone',vp:'هندوانه',de:'Willkommen, kleines Wunder! 🤍',ps:'ښه راغلې کوچنیه معجزه! 🤍'},
+ 41:{cm:51.5,g:3600,f:'🍉',v:'eine Wassermelone',vp:'هندوانه',de:'Manche Babys lassen sich etwas Zeit.',ps:'ځینې ماشومان لږ وخت نیسي.'},
+ 42:{cm:51.7,g:3700,f:'🍉',v:'eine Wassermelone',vp:'هندوانه',de:'Ganz bald ist es so weit!',ps:'ډېر ژر به راشي!'}
+};
+
+function midnight(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+function fmtG(g) { return g >= 1000 ? (g / 1000).toFixed(2).replace('.', ',') + ' kg' : Math.round(g) + ' g'; }
+
+function pregInfo() {
+  const today = midnight(new Date());
+  const start = new Date(DUE.getTime() - PREG_DAYS * MS_DAY);
+  let days = Math.round((today - start) / MS_DAY);
+  days = Math.max(0, Math.min(PREG_DAYS + 14, days));
+  return { days: days, weeks: Math.floor(days / 7), plus: days % 7, left: Math.round((DUE - today) / MS_DAY) };
+}
+
+function interp(days) {
+  const w = Math.max(4, Math.min(41, Math.floor(days / 7)));
+  const d = days / 7 - w;
+  const a = W[w], b = W[Math.min(42, w + 1)] || a;
+  return {
+    g: a.g + (b.g - a.g) * d,
+    cm: a.cm + (b.cm - a.cm) * d,
+    gainDay: (b.g - a.g) / 7,
+    week: w
+  };
+}
+
+function updateToday() {
+  const p = pregInfo();
+  const t = interp(p.days);
+  const wk = Math.max(4, Math.min(42, t.week));
+  const info = W[wk];
+
+  document.getElementById('fruit').textContent = info.f;
+  document.getElementById('compare').firstChild.textContent = 'So groß wie ' + info.v + ' ';
+  document.getElementById('comparePs').textContent = 'دومره لوی لکه ' + info.vp;
+
+  document.getElementById('sswV').innerHTML = p.weeks + '<small>+' + p.plus + '</small>';
+  document.getElementById('kgV').textContent = fmtG(t.g);
+  document.getElementById('cmV').textContent = t.cm.toFixed(1).replace('.', ',') + ' cm';
+
+  const gain = Math.round(t.gainDay);
+  document.getElementById('todayLine').innerHTML =
+    '🤍 Heute ca. +' + gain + ' g gewachsen — noch ' + p.left + ' Tage bis zur Geburt' +
+    '<span class="ps">نن نږدې ' + gain + ' ګرامه لوی شو — تر زېږون پورې ' + p.left + ' ورځې پاتې دي</span>';
+
+  const pct = Math.min(100, Math.round((p.days / PREG_DAYS) * 100));
+  document.getElementById('ring').style.background =
+    'conic-gradient(#e75a7c 0% ' + pct + '%, rgba(0,0,0,0.07) ' + pct + '% 100%)';
+  document.getElementById('ringPct').textContent = pct + '%';
+  document.getElementById('ringText').innerHTML =
+    'Schwangerschaftswoche <b>' + (p.weeks + 1) + '</b> von 40<br>' +
+    '<b>' + p.left + ' Tage</b> bis zum 9. September' +
+    '<span class="ps">اونۍ ' + (p.weeks + 1) + ' له ۴۰ څخه 🤍</span>';
+
+  return wk;
+}
+
+function showWeek(w) {
+  const info = W[w];
+  const p = pregInfo();
+  const cur = Math.floor(p.days / 7);
+  document.getElementById('slider').value = w;
+  document.getElementById('expWeek').innerHTML =
+    'Woche <b>' + w + '</b>' + (w === cur ? ' — 📍 aktuelle Woche · اوسنۍ اونۍ' : (w < cur ? ' — vergangen · تېره شوې' : ' — kommt noch · راتلونکې'));
+  document.getElementById('expFruit').textContent = info.f;
+  document.getElementById('expData').innerHTML =
+    'Größe: <b>' + String(info.cm).replace('.', ',') + ' cm</b><br>' +
+    'Gewicht: <b>' + fmtG(info.g) + '</b><br>' +
+    'So groß wie <b>' + info.v + '</b>';
+  document.getElementById('expText').innerHTML =
+    info.de + '<span class="ps">' + info.ps + '</span>';
+}
+
+function jumpToday() { showWeek(updateToday()); }
+
+const curWeek = updateToday();
+showWeek(curWeek);
+setInterval(updateToday, 60000);
+document.addEventListener('visibilitychange', function () { if (!document.hidden) updateToday(); });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+}
+</script>
+
+</body>
+</html>
