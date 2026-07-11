@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f0e17">
+<title>Für Roya 🤍</title>
+<style>
+  :root {
+    --bg1: #0f0e17;
+    --bg2: #1b1a2e;
+    --text: #fffffe;
+    --soft: rgba(255, 255, 254, 0.55);
+    --softer: rgba(255, 255, 254, 0.32);
+    --accent: #ff8ba7;
+    --accent-soft: rgba(255, 139, 167, 0.14);
+    --baby: #8ecae6;
+    --baby-soft: rgba(142, 202, 230, 0.14);
+    --line: rgba(255, 255, 254, 0.10);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg1);
+    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg1) 70%) fixed;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: calc(env(safe-area-inset-top) + 16px) env(safe-area-inset-right) calc(env(safe-area-inset-bottom) + 40px) env(safe-area-inset-left);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: rgba(255, 255, 254, 0.5);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; }
+    50%      { opacity: 0.7; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 28px;
+    max-width: 380px;
+    width: 100%;
+    animation: fadeUp 0.9s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .heart {
+    font-size: 30px;
+    display: inline-block;
+    animation: beat 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(255, 139, 167, 0.45));
+    margin-bottom: 22px;
+  }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); }
+    12%      { transform: scale(1.18); }
+    24%      { transform: scale(1); }
+    36%      { transform: scale(1.12); }
+    48%      { transform: scale(1); }
+  }
+
+  .dedication {
+    font-family: "Snell Roundhand", "Savoye LET", "Brush Script MT", cursive;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--accent);
+    margin-bottom: 8px;
+    text-shadow: 0 0 24px rgba(255, 139, 167, 0.35);
+  }
+
+  .dedication-sub {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--soft);
+    letter-spacing: 0.02em;
+    margin-bottom: 34px;
+  }
+
+  .label {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--softer);
+    margin-bottom: 6px;
+  }
+
+  .days {
+    font-size: clamp(88px, 30vw, 128px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--text); /* Fallback: immer sichtbar, auch ohne Verlaufs-Effekt */
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Verlaufs-Effekt nur, wenn der Browser ihn wirklich kann */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .days {
+      background: linear-gradient(180deg, #fffffe 30%, #c9c7e8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .days-word {
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--soft);
+    margin-top: 10px;
+  }
+
+  .divider {
+    width: 44px;
+    height: 1px;
+    background: var(--line);
+    margin: 30px auto;
+  }
+
+  .weeks {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--soft);
+    line-height: 1.5;
+  }
+  .weeks strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .progress-wrap {
+    margin: 32px auto 0;
+    max-width: 240px;
+  }
+  .progress-track {
+    height: 4px;
+    border-radius: 4px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent), #ffb3c6);
+    width: 0%;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 0 10px rgba(255, 139, 167, 0.5);
+  }
+  .progress-label {
+    margin-top: 10px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--softer);
+  }
+
+  .date-pill {
+    display: inline-block;
+    margin-top: 34px;
+    padding: 9px 20px;
+    border-radius: 100px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(255, 139, 167, 0.22);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  .together {
+    font-size: clamp(26px, 8vw, 34px);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .together .sub {
+    display: block;
+    margin-top: 14px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--soft);
+    letter-spacing: 0;
+  }
+
+  .cards-divider {
+    width: 100%;
+    max-width: 260px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--softer);
+    font-size: 12px;
+    margin: 4px 0;
+  }
+  .cards-divider::before,
+  .cards-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .baby-emoji {
+    font-size: 30px;
+    display: inline-block;
+    margin-bottom: 22px;
+    animation: float 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 0 14px rgba(142, 202, 230, 0.45));
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  .baby-title {
+    color: var(--baby);
+    text-shadow: 0 0 24px rgba(142, 202, 230, 0.35);
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .baby-card .days {
+      background: linear-gradient(180deg, #fffffe 30%, #bfe3f5 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+  }
+
+  .noscript-hint {
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: 16px auto 0;
+    max-width: 340px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: rgba(255, 139, 167, 0.12);
+    border: 1px solid rgba(255, 139, 167, 0.3);
+    color: #ffb3c6;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .baby-fill {
+    background: linear-gradient(90deg, var(--baby), #c9e8f7);
+    box-shadow: 0 0 10px rgba(142, 202, 230, 0.5);
+  }
+
+  .baby-pill {
+    background: var(--baby-soft);
+    border-color: rgba(142, 202, 230, 0.22);
+    color: var(--baby);
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<noscript>
+  <span class="noscript-hint">
+    Hinweis: Diese Vorschau zeigt den Stand vom <strong>11. Juli 2026</strong>.<br>
+    In <strong>Safari</strong> oder einem anderen Browser geöffnet,
+    zählt die Seite automatisch jeden Tag weiter. 🤍
+  </span>
+</noscript>
+
+<main class="card" id="card">
+  <div class="heart">🤍</div>
+  <div class="dedication">Für Roya, die Liebliche</div>
+  <div class="dedication-sub">Jeder Tag bringt mich näher zu dir</div>
+  <div id="content">
+    <div class="label">Noch</div>
+    <div class="days" id="days">39</div>
+    <div class="days-word" id="daysWord">Tage</div>
+    <div class="divider"></div>
+    <div class="weeks" id="weeks">Das sind <strong>5 Wochen</strong> und <strong>4 Tage</strong></div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="fill" style="width: 0%"></div></div>
+      <div class="progress-label" id="percent">0 % geschafft</div>
+    </div>
+    <div class="date-pill">19. August 2026</div>
+  </div>
+</main>
+
+<div class="cards-divider">✦</div>
+
+<section class="card baby-card">
+  <div class="baby-emoji">👶</div>
+  <div class="dedication baby-title">Unser kleines Wunder</div>
+  <div class="dedication-sub">Bald sind wir zu dritt</div>
+  <div id="babyContent">
+    <div class="label">Noch</div>
+    <div class="days" id="babyDays">60</div>
+    <div class="days-word" id="babyDaysWord">Tage bis zur Geburt</div>
+    <div class="divider"></div>
+    <div class="weeks" id="babyWeeks">Das sind <strong>8 Wochen</strong> und <strong>4 Tage</strong></div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill baby-fill" id="babyFill" style="width: 79%"></div></div>
+      <div class="progress-label" id="babySsw">SSW 32 von 40 · 79 % geschafft</div>
+    </div>
+    <div class="date-pill baby-pill" id="babyPill">ET: 9. September 2026</div>
+  </div>
+</section>
+
+<script>
+  const TARGET = new Date(2026, 7, 19);       // 19.08.2026
+  const START  = new Date(2026, 6, 11);       // Start des Zählens (für den Fortschrittsbalken)
+  const DUE    = new Date(2026, 8, 9);        // Errechneter Geburtstermin (ET) — hier anpassen, falls anders!
+  const PREG_DAYS = 280;                      // 40 Wochen
+  const MS_DAY = 86400000;
+
+  function midnight(d) {
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+
+  function update() {
+    const today = midnight(new Date());
+    const days = Math.round((TARGET - today) / MS_DAY);
+
+    const content = document.getElementById('content');
+
+    if (days <= 0) {
+      content.innerHTML =
+        '<div class="together">Roya, ich bin da 🤍' +
+        '<span class="sub">Die Wartezeit ist vorbei — endlich wieder zusammen.</span></div>';
+      return;
+    }
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('daysWord').textContent = days === 1 ? 'Tag' : 'Tage';
+
+    const w = Math.floor(days / 7);
+    const r = days % 7;
+    let text;
+    if (w === 0) {
+      text = 'Weniger als eine Woche!';
+    } else {
+      const wWord = w === 1 ? 'Woche' : 'Wochen';
+      const rWord = r === 1 ? 'Tag' : 'Tage';
+      text = r === 0
+        ? 'Das sind genau <strong>' + w + ' ' + wWord + '</strong>'
+        : 'Das sind <strong>' + w + ' ' + wWord + '</strong> und <strong>' + r + ' ' + rWord + '</strong>';
+    }
+    document.getElementById('weeks').innerHTML = text;
+
+    const total = Math.round((TARGET - midnight(START)) / MS_DAY);
+    const done = Math.max(0, Math.min(total, total - days));
+    const pct = Math.round((done / total) * 100);
+    setTimeout(function () {
+      document.getElementById('fill').style.width = pct + '%';
+    }, 300);
+    document.getElementById('percent').textContent = pct + ' % geschafft';
+  }
+
+  // Sterne im Hintergrund
+  (function () {
+    const wrap = document.getElementById('stars');
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = Math.random() * 4 + 's';
+      const size = 1 + Math.random() * 2;
+      s.style.width = size + 'px';
+      s.style.height = size + 'px';
+      wrap.appendChild(s);
+    }
+  })();
+
+  function updateBaby() {
+    const today = midnight(new Date());
+    const left = Math.round((DUE - today) / MS_DAY);
+    const content = document.getElementById('babyContent');
+
+    if (left <= 0) {
+      content.innerHTML =
+        '<div class="together">Willkommen,<br>kleines Wunder 🤍' +
+        '<span class="sub">Der schönste Tag ist da.</span></div>';
+      return;
+    }
+
+    document.getElementById('babyDays').textContent = left;
+    document.getElementById('babyDaysWord').textContent =
+      (left === 1 ? 'Tag' : 'Tage') + ' bis zur Geburt';
+
+    const w = Math.floor(left / 7);
+    const r = left % 7;
+    let text;
+    if (w === 0) {
+      text = 'Weniger als eine Woche — es kann jeden Tag so weit sein!';
+    } else {
+      const wWord = w === 1 ? 'Woche' : 'Wochen';
+      const rWord = r === 1 ? 'Tag' : 'Tage';
+      text = r === 0
+        ? 'Das sind genau <strong>' + w + ' ' + wWord + '</strong>'
+        : 'Das sind <strong>' + w + ' ' + wWord + '</strong> und <strong>' + r + ' ' + rWord + '</strong>';
+    }
+    document.getElementById('babyWeeks').innerHTML = text;
+
+    const done = Math.max(0, Math.min(PREG_DAYS, PREG_DAYS - left));
+    const ssw = Math.min(40, Math.floor(done / 7) + 1);
+    const pct = Math.round((done / PREG_DAYS) * 100);
+    setTimeout(function () {
+      document.getElementById('babyFill').style.width = pct + '%';
+    }, 300);
+    document.getElementById('babySsw').textContent = 'SSW ' + ssw + ' von 40 · ' + pct + ' % geschafft';
+  }
+
+  function refresh() {
+    update();
+    updateBaby();
+  }
+
+  refresh();
+  // Aktualisiert automatisch um Mitternacht bzw. wenn die Seite wieder geöffnet wird
+  setInterval(refresh, 60000);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) refresh();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff5f8">
+<title>Deutsch für Roya 🌸</title>
+<style>
+  :root {
+    --bg1: #faf9f7;
+    --bg2: #fff5f8;
+    --text: #2b2b3a;
+    --soft: rgba(43, 43, 58, 0.62);
+    --softer: rgba(43, 43, 58, 0.42);
+    --accent: #e75a7c;
+    --accent-soft: rgba(231, 90, 124, 0.08);
+    --blue: #3d8fb5;
+    --blue-soft: rgba(61, 143, 181, 0.08);
+    --green: #3f9d63;
+    --green-soft: rgba(63, 157, 99, 0.10);
+    --red: #d95757;
+    --red-soft: rgba(217, 87, 87, 0.10);
+    --gold: #c8901f;
+    --card: #ffffff;
+    --card-border: #f0e6ea;
+    --line: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 14px rgba(190, 140, 160, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body { min-height: 100%; overflow-x: hidden; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg1);
+    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg1) 70%) fixed;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: rgba(231, 90, 124, 0.22);
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+
+  .noscript-hint {
+    position: relative; z-index: 2; display: block;
+    margin: 24px auto; max-width: 340px; padding: 14px 18px;
+    border-radius: 14px; background: var(--accent-soft);
+    border: 1px solid rgba(231, 90, 124, 0.3); color: var(--accent);
+    font-size: 14px; line-height: 1.5; text-align: center;
+  }
+
+  #wrap {
+    position: relative; z-index: 1;
+    max-width: 430px; margin: 0 auto;
+    padding: calc(env(safe-area-inset-top) + 14px) 18px calc(env(safe-area-inset-bottom) + 96px);
+  }
+
+  /* ---------- Kopf ---------- */
+  .brand { text-align: center; margin-bottom: 4px; }
+  .brand .flower { font-size: 26px; }
+  .brand h1 {
+    font-family: "Snell Roundhand", "Savoye LET", "Brush Script MT", cursive;
+    font-size: 28px; font-weight: 400; color: var(--accent);
+    text-shadow: 0 1px 12px rgba(231, 90, 124, 0.2);
+  }
+  .brand .hello { font-size: 14px; color: var(--soft); margin-top: 2px; direction: rtl; }
+
+  .stats { display: flex; gap: 8px; margin: 14px 0 6px; }
+  .stat {
+    flex: 1; text-align: center; padding: 10px 4px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+  .stat .v { font-size: 18px; font-weight: 700; }
+  .stat .k { font-size: 10.5px; color: var(--softer); margin-top: 2px; direction: rtl; }
+
+  .goal {
+    margin: 10px 0 4px; padding: 10px 14px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 14px;
+    box-shadow: var(--shadow);
+    font-size: 12.5px; color: var(--soft); direction: rtl; text-align: right;
+  }
+  .goal .bar { margin-top: 7px; }
+
+  /* ---------- Allgemein ---------- */
+  .bar { height: 5px; border-radius: 5px; background: var(--line); overflow: hidden; }
+  .bar > i {
+    display: block; height: 100%; border-radius: 5px;
+    background: linear-gradient(90deg, var(--accent), #f08fa8);
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .bar.blue > i { background: linear-gradient(90deg, var(--blue), #7fc0dd); }
+  .bar.gold > i { background: linear-gradient(90deg, #e6ad3c, #f4cd7c); }
+
+  .section-title {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 20px 2px 10px;
+  }
+  .section-title b { font-size: 16px; }
+  .section-title span { font-size: 13px; color: var(--softer); direction: rtl; }
+
+  .ps { direction: rtl; }
+
+  /* ---------- Kategorie-Gitter ---------- */
+  .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cat-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 14px; cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease;
+  }
+  .cat-card:active { transform: scale(0.97); }
+  .cat-card .ic { font-size: 26px; }
+  .cat-card .de { font-size: 14.5px; font-weight: 600; margin-top: 8px; }
+  .cat-card .psn { font-size: 12.5px; color: var(--soft); margin-top: 1px; direction: rtl; text-align: right; }
+  .cat-card .cnt { font-size: 11px; color: var(--softer); margin: 8px 0 5px; display: flex; justify-content: space-between; }
+  .cat-card .trophy { float: right; font-size: 15px; }
+
+  /* ---------- Wortkarten ---------- */
+  .backrow { display: flex; align-items: center; justify-content: space-between; margin: 4px 0 12px; }
+  .backbtn {
+    border: 1px solid var(--card-border); background: var(--card); color: var(--text);
+    border-radius: 100px; padding: 8px 16px; font-size: 14px; cursor: pointer;
+    box-shadow: var(--shadow);
+  }
+  .quizbtn {
+    border: none; border-radius: 100px; padding: 9px 18px; font-size: 14px; font-weight: 600;
+    background: linear-gradient(90deg, var(--accent), #f08fa8); color: #fff; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(231, 90, 124, 0.35);
+  }
+
+  .word-card {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 18px; padding: 14px 16px; margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .word-card.done { border-color: rgba(63, 157, 99, 0.4); background: #f6fbf7; }
+  .word-card .tag {
+    position: absolute; top: 12px; left: 16px;
+    font-size: 10px; letter-spacing: 0.08em; color: var(--softer);
+    border: 1px solid var(--line); border-radius: 100px; padding: 2px 8px;
+  }
+  .wc-top { display: flex; align-items: center; gap: 10px; }
+  .speak {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid rgba(61, 143, 181, 0.35); background: var(--blue-soft);
+    font-size: 17px; cursor: pointer; color: var(--blue);
+  }
+  .speak:active { transform: scale(0.92); }
+  .wc-de { font-size: 19px; font-weight: 700; line-height: 1.25; }
+  .wc-de.sent { font-size: 16.5px; }
+  .wc-ps { font-size: 17px; color: var(--text); margin-top: 8px; direction: rtl; text-align: right; }
+  .wc-say { font-size: 13.5px; color: var(--blue); margin-top: 5px; direction: rtl; text-align: right; }
+  .wc-say b { font-weight: 400; color: var(--softer); font-size: 12px; }
+  .learnbtn {
+    margin-top: 11px; width: 100%; padding: 10px; border-radius: 12px;
+    border: 1px solid var(--card-border); background: #fbfafa; color: var(--soft);
+    font-size: 14px; cursor: pointer; direction: rtl;
+  }
+  .learnbtn.on {
+    background: var(--green-soft); border-color: rgba(63, 157, 99, 0.4); color: var(--green); font-weight: 600;
+  }
+
+  /* ---------- Quiz ---------- */
+  .quiz-head { text-align: center; margin: 10px 0 18px; }
+  .quiz-head .q-ps { font-size: 15px; color: var(--soft); direction: rtl; }
+  .quiz-word { text-align: center; font-size: 30px; font-weight: 700; margin: 18px 0 6px; line-height: 1.3; }
+  .quiz-word.rtl { direction: rtl; font-size: 26px; }
+  .quiz-say { text-align: center; font-size: 14px; color: var(--blue); direction: rtl; min-height: 20px; }
+  .opts { margin-top: 22px; display: grid; gap: 10px; }
+  .opt {
+    padding: 15px 16px; border-radius: 15px; font-size: 16.5px;
+    background: var(--card); border: 1px solid var(--card-border); color: var(--text);
+    box-shadow: var(--shadow);
+    cursor: pointer; text-align: center;
+  }
+  .opt.rtl { direction: rtl; }
+  .opt.ok { background: var(--green-soft); border-color: var(--green); color: var(--green); font-weight: 700; }
+  .opt.bad { background: var(--red-soft); border-color: var(--red); color: var(--red); }
+  .quiz-foot { margin-top: 20px; text-align: center; font-size: 13px; color: var(--softer); }
+
+  .result { text-align: center; padding: 30px 10px; }
+  .result .stars-row { font-size: 42px; letter-spacing: 6px; }
+  .result h2 { margin: 14px 0 6px; font-size: 24px; }
+  .result .ps { color: var(--soft); font-size: 15px; }
+  .result .pts { margin: 18px 0; font-size: 17px; color: var(--gold); font-weight: 700; }
+
+  .bigbtn {
+    display: block; width: 100%; margin-top: 12px; padding: 15px;
+    border-radius: 15px; border: none; font-size: 16px; font-weight: 600; cursor: pointer;
+    background: linear-gradient(90deg, var(--accent), #f08fa8); color: #fff;
+    box-shadow: 0 4px 16px rgba(231, 90, 124, 0.3);
+  }
+  .bigbtn.ghost { background: var(--card); border: 1px solid var(--card-border); color: var(--text); box-shadow: var(--shadow); }
+
+  /* ---------- Fortschritt ---------- */
+  .prog-hero {
+    text-align: center; padding: 22px 16px;
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+  .prog-hero .pct { font-size: 52px; font-weight: 700; color: var(--accent); }
+  .prog-hero .sub { font-size: 13.5px; color: var(--soft); margin-top: 4px; }
+  .prog-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 15px; padding: 12px 14px; margin-bottom: 8px;
+    box-shadow: var(--shadow);
+  }
+  .prog-row .ic { font-size: 21px; }
+  .prog-row .mid { flex: 1; }
+  .prog-row .nm { font-size: 13.5px; font-weight: 600; }
+  .prog-row .bar { margin-top: 6px; }
+  .prog-row .num { font-size: 12px; color: var(--softer); text-align: right; min-width: 62px; }
+
+  /* ---------- Tab-Leiste ---------- */
+  #tabbar {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 5;
+    display: flex; justify-content: center; gap: 10px;
+    padding: 10px 18px calc(env(safe-area-inset-bottom) + 12px);
+    background: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+  }
+  #tabbar button {
+    flex: 1; max-width: 200px; padding: 11px; border-radius: 100px;
+    border: 1px solid var(--card-border); background: transparent; color: var(--soft);
+    font-size: 14px; cursor: pointer;
+  }
+  #tabbar button.active {
+    background: var(--accent-soft); border-color: rgba(231, 90, 124, 0.4);
+    color: var(--accent); font-weight: 600;
+  }
+
+  /* ---------- Herzchen-Regen ---------- */
+  .heart-fx { position: fixed; top: -40px; z-index: 20; pointer-events: none; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(300deg); opacity: 0.2; } }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 110px; transform: translateX(-50%);
+    z-index: 30; background: #fff; border: 1px solid rgba(200, 144, 31, 0.5);
+    box-shadow: var(--shadow);
+    color: var(--gold); padding: 11px 20px; border-radius: 100px; font-size: 14px; font-weight: 600;
+    white-space: nowrap; animation: toastIn 0.3s ease, toastOut 0.4s ease 2.2s forwards;
+  }
+  @keyframes toastIn { from { opacity: 0; transform: translate(-50%, 14px); } }
+  @keyframes toastOut { to { opacity: 0; transform: translate(-50%, -8px); } }
+
+  .footnote { text-align: center; font-size: 11.5px; color: var(--softer); margin-top: 26px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<noscript>
+  <span class="noscript-hint">
+    دلته یوازې مخکتنه ده — دا اپلیکېشن باید په <strong>Safari</strong> کې خلاص شي. 🌸<br>
+    Nur Vorschau: Bitte in <strong>Safari</strong> oder einem Browser öffnen,
+    dann funktionieren Lernen, Quiz und Punkte.
+  </span>
+</noscript>
+
+<div id="wrap">
+  <header>
+    <div class="brand">
+      <div class="flower">🌸</div>
+      <h1>Deutsch für Roya</h1>
+      <div class="hello" id="hello">سلام رویا جانې! نن هم لږ الماني زده کړو 🤍</div>
+    </div>
+    <div class="stats" id="statsRow">
+      <div class="stat"><div class="v">⭐ 0</div><div class="k">امتیازونه · Punkte</div></div>
+      <div class="stat"><div class="v">🔥 0</div><div class="k">پرله‌پسې ورځې · Serie</div></div>
+      <div class="stat"><div class="v">🌱</div><div class="k">نوې زده‌کوونکې · Anfängerin</div></div>
+    </div>
+    <div class="goal" id="goalBox">
+      د نن ورځې موخه: <b>0 / 5</b> نوي لغتونه 💪
+      <div class="bar gold"><i style="width:0%"></i></div>
+    </div>
+  </header>
+
+  <!-- Startansicht: fest eingebaut, damit die Datei nie leer aussieht.
+       JavaScript ersetzt diesen Inhalt beim Öffnen sofort durch die interaktive Version. -->
+  <main id="app">
+    <div class="section-title"><b>Kategorien</b><span>برخې وټاکئ او زده کړئ</span></div>
+    <div class="cat-grid">
+      <div class="cat-card"><div class="ic">👋</div><div class="de">Begrüßung</div><div class="psn">سلام او ادب</div><div class="cnt"><span>0 / 20</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">👨‍👩‍👧</div><div class="de">Familie</div><div class="psn">کورنۍ</div><div class="cnt"><span>0 / 17</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🔢</div><div class="de">Zahlen</div><div class="psn">شمېرې</div><div class="cnt"><span>0 / 15</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🍲</div><div class="de">Essen &amp; Kochen</div><div class="psn">خواړه او پخلی</div><div class="cnt"><span>0 / 22</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🛒</div><div class="de">Einkaufen</div><div class="psn">سودا اخیستل</div><div class="cnt"><span>0 / 15</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">✈️</div><div class="de">Reisen</div><div class="psn">سفر</div><div class="cnt"><span>0 / 17</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🏠</div><div class="de">Zu Hause</div><div class="psn">کور</div><div class="cnt"><span>0 / 14</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🕐</div><div class="de">Zeit &amp; Tage</div><div class="psn">وخت او ورځې</div><div class="cnt"><span>0 / 17</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🎨</div><div class="de">Farben</div><div class="psn">رنګونه</div><div class="cnt"><span>0 / 11</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+      <div class="cat-card"><div class="ic">🏥</div><div class="de">Gesundheit &amp; Notfall</div><div class="psn">روغتیا او بیړني حالت</div><div class="cnt"><span>0 / 14</span><span>0%</span></div><div class="bar"><i style="width:0%"></i></div></div>
+    </div>
+    <div class="footnote">🔊 پر هره کارت د غږ تڼۍ کېکاږئ — ایفون یې په الماني لوستل کوي.<br>
+    Tipp: In Safari öffnen → Teilen → „Zum Home-Bildschirm“ 🌸</div>
+  </main>
+</div>
+
+<nav id="tabbar">
+  <button id="tabHome" class="active" onclick="goHome()">📖 زده کړه · Lernen</button>
+  <button id="tabProg" onclick="goProgress()">📊 پرمختګ · Fortschritt</button>
+</nav>
+
+<script>
+/* =====================================================
+   Wortschatz A1 — Deutsch / Pashto / Aussprache (Pashto)
+   t: 'w' = Wort, 's' = Satz
+===================================================== */
+const CATS = [
+{ id:'gruss', ic:'👋', de:'Begrüßung', ps:'سلام او ادب', items:[
+  {t:'w', de:'Hallo', ps:'سلام', say:'هالو'},
+  {t:'w', de:'Guten Morgen', ps:'سهار مو پخیر', say:'ګوتن مورګن'},
+  {t:'w', de:'Guten Tag', ps:'ورځ مو پخیر', say:'ګوتن تاګ'},
+  {t:'w', de:'Guten Abend', ps:'ماښام مو پخیر', say:'ګوتن آبنت'},
+  {t:'w', de:'Gute Nacht', ps:'شپه مو پخیر', say:'ګوته ناخت'},
+  {t:'w', de:'Tschüss', ps:'مخه مو ښه', say:'چوس'},
+  {t:'w', de:'Auf Wiedersehen', ps:'بیا به سره وینو', say:'اوف ویدرزېن'},
+  {t:'w', de:'Danke', ps:'مننه', say:'دانکه'},
+  {t:'w', de:'Danke schön', ps:'ډېره مننه', say:'دانکه شون'},
+  {t:'w', de:'Bitte', ps:'هرکله / مهرباني', say:'بیته'},
+  {t:'w', de:'Ja', ps:'هو', say:'یا'},
+  {t:'w', de:'Nein', ps:'نه', say:'ناین'},
+  {t:'w', de:'Entschuldigung', ps:'بښنه غواړم', say:'اینتشولدیګونګ'},
+  {t:'s', de:'Wie geht es dir?', ps:'ته څنګه یې؟', say:'وی ګېت اېس دیر؟'},
+  {t:'s', de:'Mir geht es gut, danke.', ps:'زه ښه یم، مننه.', say:'میر ګېت اېس ګوت، دانکه'},
+  {t:'s', de:'Ich heiße Roya.', ps:'زما نوم رویا دی.', say:'ایش هایسه رویا'},
+  {t:'s', de:'Ich komme aus Afghanistan.', ps:'زه له افغانستانه یم.', say:'ایش کومه اوس افغانستان'},
+  {t:'s', de:'Ich lerne Deutsch.', ps:'زه الماني زده کوم.', say:'ایش لیرنه دویچ'},
+  {t:'s', de:'Ich verstehe nicht.', ps:'زه نه پوهېږم.', say:'ایش فرشتېهه نیشت'},
+  {t:'s', de:'Bitte langsam sprechen.', ps:'مهرباني وکړئ ورو خبرې وکړئ.', say:'بیته لانګزام شپرېشن'}
+]},
+{ id:'familie', ic:'👨‍👩‍👧', de:'Familie', ps:'کورنۍ', items:[
+  {t:'w', de:'die Familie', ps:'کورنۍ', say:'فامیلیه'},
+  {t:'w', de:'die Frau', ps:'ښځه / مېرمن', say:'فراو'},
+  {t:'w', de:'der Mann', ps:'سړی / مېړه', say:'مان'},
+  {t:'w', de:'die Mutter', ps:'مور', say:'موتر'},
+  {t:'w', de:'der Vater', ps:'پلار', say:'فاتر'},
+  {t:'w', de:'die Eltern', ps:'مور او پلار', say:'ایلترن'},
+  {t:'w', de:'der Sohn', ps:'زوی', say:'زون'},
+  {t:'w', de:'die Tochter', ps:'لور', say:'توختر'},
+  {t:'w', de:'der Bruder', ps:'ورور', say:'برودر'},
+  {t:'w', de:'die Schwester', ps:'خور', say:'شوېستر'},
+  {t:'w', de:'das Kind', ps:'ماشوم', say:'کینت'},
+  {t:'w', de:'das Baby', ps:'کوچنی ماشوم', say:'بېبي'},
+  {t:'w', de:'die Liebe', ps:'مینه', say:'لیبه'},
+  {t:'w', de:'das Herz', ps:'زړه', say:'هیرتس'},
+  {t:'s', de:'Das ist meine Familie.', ps:'دا زما کورنۍ ده.', say:'داس ایست ماینه فامیلیه'},
+  {t:'s', de:'Ich liebe dich.', ps:'زه له تا سره مینه لرم.', say:'ایش لیبه دیش'},
+  {t:'s', de:'Wir bekommen ein Baby.', ps:'موږ به ماشوم ولرو.', say:'ویر بېکومن این بېبي'}
+]},
+{ id:'zahlen', ic:'🔢', de:'Zahlen', ps:'شمېرې', items:[
+  {t:'w', de:'eins', ps:'یو', say:'آینس'},
+  {t:'w', de:'zwei', ps:'دوه', say:'تسوای'},
+  {t:'w', de:'drei', ps:'درې', say:'درای'},
+  {t:'w', de:'vier', ps:'څلور', say:'فیر'},
+  {t:'w', de:'fünf', ps:'پنځه', say:'فونف'},
+  {t:'w', de:'sechs', ps:'شپږ', say:'زېکس'},
+  {t:'w', de:'sieben', ps:'اووه', say:'زیبن'},
+  {t:'w', de:'acht', ps:'اته', say:'اخت'},
+  {t:'w', de:'neun', ps:'نهه', say:'نوین'},
+  {t:'w', de:'zehn', ps:'لس', say:'تسېن'},
+  {t:'w', de:'elf', ps:'یوولس', say:'ایلف'},
+  {t:'w', de:'zwölf', ps:'دوولس', say:'تسوولف'},
+  {t:'w', de:'zwanzig', ps:'شل', say:'تسوانتسیش'},
+  {t:'w', de:'hundert', ps:'سل', say:'هوندرت'},
+  {t:'s', de:'Ich bin 25 Jahre alt.', ps:'زه ۲۵ کلنه یم.', say:'ایش بین فونف اونت تسوانتسیش یاره الت'}
+]},
+{ id:'essen', ic:'🍲', de:'Essen & Kochen', ps:'خواړه او پخلی', items:[
+  {t:'w', de:'das Essen', ps:'خواړه', say:'ایسن'},
+  {t:'w', de:'das Wasser', ps:'اوبه', say:'واسر'},
+  {t:'w', de:'das Brot', ps:'ډوډۍ', say:'بروت'},
+  {t:'w', de:'der Reis', ps:'وریجې', say:'رایس'},
+  {t:'w', de:'das Fleisch', ps:'غوښه', say:'فلایش'},
+  {t:'w', de:'das Hähnchen', ps:'چرګ', say:'هېنشن'},
+  {t:'w', de:'das Gemüse', ps:'سابه / سبزیجات', say:'ګېموزه'},
+  {t:'w', de:'das Obst', ps:'مېوه', say:'اوپست'},
+  {t:'w', de:'der Apfel', ps:'مڼه', say:'اپفل'},
+  {t:'w', de:'die Kartoffel', ps:'کچالو', say:'کارتوفل'},
+  {t:'w', de:'das Ei', ps:'هګۍ', say:'ای'},
+  {t:'w', de:'die Milch', ps:'شیدې', say:'میلش'},
+  {t:'w', de:'der Tee', ps:'چای', say:'تې'},
+  {t:'w', de:'der Zucker', ps:'بوره', say:'تسوکر'},
+  {t:'w', de:'das Salz', ps:'مالګه', say:'زالتس'},
+  {t:'w', de:'kochen', ps:'پخول', say:'کوخن'},
+  {t:'w', de:'lecker', ps:'خوندور', say:'لیکر'},
+  {t:'s', de:'Ich habe Hunger.', ps:'زه وږې یم.', say:'ایش هابه هونګر'},
+  {t:'s', de:'Ich habe Durst.', ps:'زه تږې یم.', say:'ایش هابه دورست'},
+  {t:'s', de:'Das Essen ist lecker.', ps:'خواړه خوندور دي.', say:'داس ایسن ایست لیکر'},
+  {t:'s', de:'Ich koche heute Reis.', ps:'نن زه وریجې پخوم.', say:'ایش کوخه هویته رایس'},
+  {t:'s', de:'Möchtest du Tee?', ps:'چای غواړې؟', say:'موشتست دو تې؟'}
+]},
+{ id:'einkaufen', ic:'🛒', de:'Einkaufen', ps:'سودا اخیستل', items:[
+  {t:'w', de:'einkaufen', ps:'سودا اخیستل', say:'این‌کاوفن'},
+  {t:'w', de:'der Supermarkt', ps:'سوپرمارکېټ', say:'زوپرمارکت'},
+  {t:'w', de:'der Markt', ps:'بازار', say:'مارکت'},
+  {t:'w', de:'das Geld', ps:'پیسې', say:'ګېلت'},
+  {t:'w', de:'der Preis', ps:'بیه', say:'پرایس'},
+  {t:'w', de:'teuer', ps:'ګران', say:'تویر'},
+  {t:'w', de:'billig', ps:'ارزان', say:'بیلیش'},
+  {t:'w', de:'kaufen', ps:'اخیستل', say:'کاوفن'},
+  {t:'w', de:'bezahlen', ps:'پیسې ورکول', say:'بېتسالن'},
+  {t:'w', de:'die Tasche', ps:'کڅوړه', say:'تاشه'},
+  {t:'w', de:'offen', ps:'خلاص', say:'اوفن'},
+  {t:'w', de:'geschlossen', ps:'تړلی', say:'ګېشلوسن'},
+  {t:'s', de:'Wie viel kostet das?', ps:'دا څومره بیه لري؟', say:'وی فیل کوستت داس؟'},
+  {t:'s', de:'Ich möchte Brot kaufen.', ps:'زه غواړم ډوډۍ واخلم.', say:'ایش موشته بروت کاوفن'},
+  {t:'s', de:'Das ist zu teuer.', ps:'دا ډېر ګران دی.', say:'داس ایست تسو تویر'}
+]},
+{ id:'reisen', ic:'✈️', de:'Reisen', ps:'سفر', items:[
+  {t:'w', de:'reisen', ps:'سفر کول', say:'رایزن'},
+  {t:'w', de:'der Zug', ps:'اورګاډی', say:'تسوګ'},
+  {t:'w', de:'der Bus', ps:'بس', say:'بوس'},
+  {t:'w', de:'das Auto', ps:'موټر', say:'اوتو'},
+  {t:'w', de:'das Flugzeug', ps:'الوتکه', say:'فلوګ‌تسویګ'},
+  {t:'w', de:'der Flughafen', ps:'هوایي ډګر', say:'فلوګ‌هافن'},
+  {t:'w', de:'der Bahnhof', ps:'د اورګاډي سټېشن', say:'بان‌هوف'},
+  {t:'w', de:'das Ticket', ps:'ټکټ', say:'تیکت'},
+  {t:'w', de:'der Koffer', ps:'بکس', say:'کوفر'},
+  {t:'w', de:'der Pass', ps:'پاسپورټ', say:'پاس'},
+  {t:'w', de:'die Straße', ps:'سړک', say:'شتراسه'},
+  {t:'w', de:'links', ps:'کیڼ لور', say:'لینکس'},
+  {t:'w', de:'rechts', ps:'ښي لور', say:'رېشتس'},
+  {t:'w', de:'geradeaus', ps:'مخامخ', say:'ګراده‌اوس'},
+  {t:'s', de:'Wo ist der Bahnhof?', ps:'سټېشن چېرته دی؟', say:'وو ایست دیر بان‌هوف؟'},
+  {t:'s', de:'Ich reise nach Deutschland.', ps:'زه آلمان ته سفر کوم.', say:'ایش رایزه ناخ دویچلانت'},
+  {t:'s', de:'Wann kommt der Bus?', ps:'بس کله راځي؟', say:'وان کومت دیر بوس؟'}
+]},
+{ id:'haus', ic:'🏠', de:'Zu Hause', ps:'کور', items:[
+  {t:'w', de:'das Haus', ps:'کور', say:'هاوس'},
+  {t:'w', de:'die Wohnung', ps:'اپارتمان', say:'وونونګ'},
+  {t:'w', de:'das Zimmer', ps:'خونه', say:'تسیمر'},
+  {t:'w', de:'die Küche', ps:'پخلنځی', say:'کوشه'},
+  {t:'w', de:'das Bad', ps:'تشناب / حمام', say:'بات'},
+  {t:'w', de:'das Bett', ps:'بستره / کټ', say:'بیت'},
+  {t:'w', de:'der Tisch', ps:'مېز', say:'تیش'},
+  {t:'w', de:'der Stuhl', ps:'چوکۍ', say:'شتول'},
+  {t:'w', de:'die Tür', ps:'دروازه', say:'تور'},
+  {t:'w', de:'das Fenster', ps:'کړکۍ', say:'فینستر'},
+  {t:'w', de:'der Schlüssel', ps:'کیلي', say:'شلوسل'},
+  {t:'w', de:'schlafen', ps:'ویده کېدل', say:'شلافن'},
+  {t:'s', de:'Ich bin zu Hause.', ps:'زه په کور کې یم.', say:'ایش بین تسو هاوزه'},
+  {t:'s', de:'Das Zimmer ist schön.', ps:'خونه ښکلې ده.', say:'داس تسیمر ایست شون'}
+]},
+{ id:'zeit', ic:'🕐', de:'Zeit & Tage', ps:'وخت او ورځې', items:[
+  {t:'w', de:'der Tag', ps:'ورځ', say:'تاګ'},
+  {t:'w', de:'die Woche', ps:'اونۍ', say:'ووخه'},
+  {t:'w', de:'der Monat', ps:'میاشت', say:'مونات'},
+  {t:'w', de:'das Jahr', ps:'کال', say:'یار'},
+  {t:'w', de:'heute', ps:'نن', say:'هویته'},
+  {t:'w', de:'morgen', ps:'سبا', say:'مورګن'},
+  {t:'w', de:'gestern', ps:'پرون', say:'ګېسترن'},
+  {t:'w', de:'jetzt', ps:'اوس', say:'یتست'},
+  {t:'w', de:'Montag', ps:'دوشنبه', say:'مونتاګ'},
+  {t:'w', de:'Dienstag', ps:'سه‌شنبه', say:'دینستاګ'},
+  {t:'w', de:'Mittwoch', ps:'چهارشنبه', say:'میت‌ووخ'},
+  {t:'w', de:'Donnerstag', ps:'پنجشنبه', say:'دونرستاګ'},
+  {t:'w', de:'Freitag', ps:'جمعه', say:'فرایتاګ'},
+  {t:'w', de:'Samstag', ps:'شنبه', say:'زامستاګ'},
+  {t:'w', de:'Sonntag', ps:'یکشنبه', say:'زونتاګ'},
+  {t:'s', de:'Wie spät ist es?', ps:'څو بجې دي؟', say:'وی شپېت ایست اېس؟'},
+  {t:'s', de:'Heute ist Montag.', ps:'نن دوشنبه ده.', say:'هویته ایست مونتاګ'}
+]},
+{ id:'farben', ic:'🎨', de:'Farben', ps:'رنګونه', items:[
+  {t:'w', de:'rot', ps:'سور', say:'روت'},
+  {t:'w', de:'blau', ps:'شین / آسماني', say:'بلاو'},
+  {t:'w', de:'grün', ps:'زرغون', say:'ګرون'},
+  {t:'w', de:'gelb', ps:'ژیړ', say:'ګیلپ'},
+  {t:'w', de:'schwarz', ps:'تور', say:'شوارتس'},
+  {t:'w', de:'weiß', ps:'سپین', say:'وایس'},
+  {t:'w', de:'braun', ps:'نسواري', say:'براون'},
+  {t:'w', de:'rosa', ps:'ګلابي', say:'روزا'},
+  {t:'w', de:'orange', ps:'نارنجي', say:'اورانژه'},
+  {t:'w', de:'lila', ps:'بنفش', say:'لیلا'},
+  {t:'s', de:'Meine Lieblingsfarbe ist Rosa.', ps:'زما خوښ رنګ ګلابي دی.', say:'ماینه لیبلینګس‌فاربه ایست روزا'}
+]},
+{ id:'gesundheit', ic:'🏥', de:'Gesundheit & Notfall', ps:'روغتیا او بیړني حالت', items:[
+  {t:'w', de:'der Arzt', ps:'ډاکټر', say:'ارتست'},
+  {t:'w', de:'die Ärztin', ps:'ښځینه ډاکټره', say:'ارتستین'},
+  {t:'w', de:'das Krankenhaus', ps:'روغتون', say:'کرانکن‌هاوس'},
+  {t:'w', de:'die Apotheke', ps:'درملتون', say:'اپوتېکه'},
+  {t:'w', de:'die Medizin', ps:'درمل', say:'مېدیتسین'},
+  {t:'w', de:'krank', ps:'ناروغ', say:'کرانک'},
+  {t:'w', de:'gesund', ps:'روغ', say:'ګېزونت'},
+  {t:'w', de:'der Schmerz', ps:'درد', say:'شمیرتس'},
+  {t:'w', de:'der Kopf', ps:'سر', say:'کوپف'},
+  {t:'w', de:'der Bauch', ps:'ګېډه / نس', say:'باوخ'},
+  {t:'s', de:'Ich bin schwanger.', ps:'زه امیندواره یم.', say:'ایش بین شوانګر'},
+  {t:'s', de:'Ich brauche einen Arzt.', ps:'زه ډاکټر ته اړتیا لرم.', say:'ایش براوخه آینن ارتست'},
+  {t:'s', de:'Mir tut der Bauch weh.', ps:'زما ګېډه خوږېږي.', say:'میر توت دیر باوخ وې'},
+  {t:'s', de:'Rufen Sie einen Krankenwagen!', ps:'امبولانس راوغواړئ!', say:'روفن زی آینن کرانکن‌واګن'}
+]}
+];
+
+const LEVELS = [
+  { min: 0,   de: 'Anfängerin',     ps: 'نوې زده‌کوونکې',  ic: '🌱' },
+  { min: 100, de: 'Gute Schülerin', ps: 'تکړه زده‌کوونکې', ic: '🌸' },
+  { min: 250, de: 'Stern',          ps: 'ستوری',           ic: '⭐' },
+  { min: 500, de: 'Heldin',         ps: 'اتله',            ic: '🏅' },
+  { min: 900, de: 'Sprachkönigin',  ps: 'د ژبې ملکه',      ic: '👑' }
+];
+
+const DAILY_GOAL = 5;      // neue Wörter pro Tag
+const PTS_LEARN = 5;
+const PTS_QUIZ = 10;
+const PTS_GOAL_BONUS = 20;
+
+/* ---------------- Zustand ---------------- */
+const KEY = 'deutschRoyaV1';
+let state = load();
+
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && typeof s === 'object') return s;
+  } catch (e) {}
+  return { points: 0, streak: 0, lastDay: '', learned: {}, awarded: {}, quizBest: {}, todayDay: '', todayCount: 0, goalBonusDay: '' };
+}
+function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function touchStreak() {
+  const t = todayStr();
+  if (state.lastDay === t) return;
+  const y = new Date(Date.now() - 86400000);
+  const yStr = y.getFullYear() + '-' + (y.getMonth() + 1) + '-' + y.getDate();
+  state.streak = (state.lastDay === yStr) ? state.streak + 1 : 1;
+  state.lastDay = t;
+  save();
+}
+function todayCount() {
+  if (state.todayDay !== todayStr()) { state.todayDay = todayStr(); state.todayCount = 0; save(); }
+  return state.todayCount;
+}
+
+function totalItems() { return CATS.reduce((n, c) => n + c.items.length, 0); }
+function learnedIn(cat) { return (state.learned[cat.id] || []).length; }
+function learnedTotal() { return CATS.reduce((n, c) => n + learnedIn(c), 0); }
+function isLearned(cat, i) { return (state.learned[cat.id] || []).indexOf(i) !== -1; }
+function level() {
+  let l = LEVELS[0];
+  for (const x of LEVELS) if (state.points >= x.min) l = x;
+  return l;
+}
+
+/* ---------------- Audio (Deutsch vorlesen) ---------------- */
+function speak(text) {
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'de-DE';
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+  } catch (e) {}
+}
+
+/* ---------------- Kopfbereich ---------------- */
+function updateHeader() {
+  const lv = level();
+  document.getElementById('statsRow').innerHTML =
+    '<div class="stat"><div class="v">⭐ ' + state.points + '</div><div class="k">امتیازونه · Punkte</div></div>' +
+    '<div class="stat"><div class="v">🔥 ' + state.streak + '</div><div class="k">پرله‌پسې ورځې · Serie</div></div>' +
+    '<div class="stat"><div class="v">' + lv.ic + '</div><div class="k">' + lv.ps + ' · ' + lv.de + '</div></div>';
+
+  const tc = Math.min(todayCount(), DAILY_GOAL);
+  const pct = Math.round((tc / DAILY_GOAL) * 100);
+  document.getElementById('goalBox').innerHTML =
+    'د نن ورځې موخه: <b>' + tc + ' / ' + DAILY_GOAL + '</b> نوي لغتونه ' + (tc >= DAILY_GOAL ? '— شاباس! 🎉' : '💪') +
+    '<div class="bar gold"><i style="width:' + pct + '%"></i></div>';
+}
+
+/* ---------------- Ansichten ---------------- */
+const app = document.getElementById('app');
+let view = 'home';
+
+function setTabs() {
+  document.getElementById('tabHome').className = (view === 'progress') ? '' : 'active';
+  document.getElementById('tabProg').className = (view === 'progress') ? 'active' : '';
+}
+
+function goHome() {
+  view = 'home'; setTabs(); updateHeader();
+  let cards = '';
+  for (const c of CATS) {
+    const n = learnedIn(c), tot = c.items.length;
+    const pct = Math.round((n / tot) * 100);
+    const done = n === tot;
+    cards +=
+      '<div class="cat-card" onclick="goCat(\'' + c.id + '\')">' +
+        (done ? '<span class="trophy">🏆</span>' : '') +
+        '<div class="ic">' + c.ic + '</div>' +
+        '<div class="de">' + c.de + '</div>' +
+        '<div class="psn">' + c.ps + '</div>' +
+        '<div class="cnt"><span>' + n + ' / ' + tot + '</span><span>' + pct + '%</span></div>' +
+        '<div class="bar' + (done ? ' gold' : '') + '"><i style="width:' + pct + '%"></i></div>' +
+      '</div>';
+  }
+  app.innerHTML =
+    '<div class="section-title"><b>Kategorien</b><span>برخې وټاکئ او زده کړئ</span></div>' +
+    '<div class="cat-grid">' + cards + '</div>' +
+    '<div class="footnote">🔊 پر هره کارت د غږ تڼۍ کېکاږئ — ایفون یې په الماني لوستل کوي.<br>' +
+    'Tipp: In Safari öffnen → Teilen → „Zum Home-Bildschirm“ 🌸</div>';
+  window.scrollTo(0, 0);
+}
+
+function goCat(id) {
+  view = 'cat'; setTabs(); updateHeader();
+  const c = CATS.find(x => x.id === id);
+  let rows = '';
+  c.items.forEach((w, i) => {
+    const on = isLearned(c, i);
+    rows +=
+      '<div class="word-card' + (on ? ' done' : '') + '" id="wc-' + i + '">' +
+        (w.t === 's' ? '<span class="tag">SATZ · جمله</span>' : '') +
+        '<div class="wc-top">' +
+          '<button class="speak" onclick="speak(\'' + w.de.replace(/'/g, "\\'") + '\')">🔊</button>' +
+          '<div class="wc-de' + (w.t === 's' ? ' sent' : '') + '">' + w.de + '</div>' +
+        '</div>' +
+        '<div class="wc-ps">' + w.ps + '</div>' +
+        '<div class="wc-say"><b>تلفظ:</b> ' + w.say + '</div>' +
+        '<button class="learnbtn' + (on ? ' on' : '') + '" onclick="toggleLearn(\'' + c.id + '\',' + i + ')">' +
+          (on ? '✓ زده مې کړل!' : 'زده مې کړل ✓') +
+        '</button>' +
+      '</div>';
+  });
+  app.innerHTML =
+    '<div class="backrow">' +
+      '<button class="backbtn" onclick="goHome()">‹ شاته</button>' +
+      '<button class="quizbtn" onclick="startQuiz(\'' + c.id + '\')">🎯 ازموینه · Quiz</button>' +
+    '</div>' +
+    '<div class="section-title"><b>' + c.ic + ' ' + c.de + '</b><span>' + c.ps + '</span></div>' +
+    rows;
+  window.scrollTo(0, 0);
+}
+
+function toggleLearn(catId, i) {
+  const c = CATS.find(x => x.id === catId);
+  state.learned[catId] = state.learned[catId] || [];
+  state.awarded[catId] = state.awarded[catId] || [];
+  const arr = state.learned[catId];
+  const pos = arr.indexOf(i);
+  if (pos !== -1) { arr.splice(pos, 1); }
+  else {
+    arr.push(i);
+    touchStreak();
+    if (state.awarded[catId].indexOf(i) === -1) {
+      state.awarded[catId].push(i);
+      state.points += PTS_LEARN;
+      todayCount();
+      state.todayCount += 1;
+      if (state.todayCount === DAILY_GOAL && state.goalBonusDay !== todayStr()) {
+        state.goalBonusDay = todayStr();
+        state.points += PTS_GOAL_BONUS;
+        toast('🎉 د ورځې موخه بشپړه شوه! +' + PTS_GOAL_BONUS + ' ⭐');
+        hearts(18);
+      }
+    }
+    if (arr.length === c.items.length) { toast('🏆 ' + c.de + ' بشپړ شو!'); hearts(24); }
+  }
+  save();
+  goCat(catId);
+}
+
+/* ---------------- Quiz ---------------- */
+let quiz = null;
+
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startQuiz(catId) {
+  const c = CATS.find(x => x.id === catId);
+  const idx = shuffle(c.items.map((_, i) => i)).slice(0, Math.min(8, c.items.length));
+  quiz = { cat: c, order: idx, pos: 0, correct: 0, locked: false };
+  view = 'quiz'; setTabs();
+  showQuestion();
+}
+
+function showQuestion() {
+  const q = quiz, c = q.cat;
+  if (q.pos >= q.order.length) return quizResult();
+  const wi = q.order[q.pos];
+  const w = c.items[wi];
+  const deToPs = Math.random() < 0.65;
+
+  const pool = shuffle(c.items.map((_, i) => i).filter(i => i !== wi)).slice(0, 3);
+  const opts = shuffle(pool.concat([wi]));
+
+  let optHtml = '';
+  for (const oi of opts) {
+    const o = c.items[oi];
+    optHtml += '<button class="opt' + (deToPs ? ' rtl' : '') + '" onclick="answer(' + oi + ',' + wi + ',' + (deToPs ? 1 : 0) + ')">' +
+      (deToPs ? o.ps : o.de) + '</button>';
+  }
+
+  app.innerHTML =
+    '<div class="backrow"><button class="backbtn" onclick="goCat(\'' + c.id + '\')">‹ پرېښودل</button>' +
+    '<span style="font-size:13px;color:var(--softer)">' + (q.pos + 1) + ' / ' + q.order.length + '</span></div>' +
+    '<div class="bar blue"><i style="width:' + Math.round((q.pos / q.order.length) * 100) + '%"></i></div>' +
+    '<div class="quiz-head" style="margin-top:22px">' +
+      '<div class="q-ps">' + (deToPs ? 'دا په پښتو څه معنا لري؟' : 'دا په الماني څنګه وایې؟') + '</div>' +
+    '</div>' +
+    '<div class="quiz-word' + (deToPs ? '' : ' rtl') + '">' + (deToPs ? w.de : w.ps) + '</div>' +
+    (deToPs ? '<div style="text-align:center;margin-top:6px"><button class="speak" onclick="speak(\'' + w.de.replace(/'/g, "\\'") + '\')">🔊</button></div>' : '') +
+    '<div class="quiz-say" id="qsay"></div>' +
+    '<div class="opts" id="opts">' + optHtml + '</div>' +
+    '<div class="quiz-foot">Richtig: ' + q.correct + ' ✓</div>';
+  quiz.locked = false;
+  window.scrollTo(0, 0);
+}
+
+function answer(chosen, correct, deToPs) {
+  if (quiz.locked) return;
+  quiz.locked = true;
+  const c = quiz.cat;
+  const w = c.items[correct];
+  const btns = document.querySelectorAll('.opt');
+
+  btns.forEach(b => {
+    const txt = b.textContent;
+    const isCorrect = deToPs ? (txt === w.ps) : (txt === w.de);
+    if (isCorrect) b.classList.add('ok');
+  });
+
+  if (chosen === correct) {
+    quiz.correct += 1;
+    state.points += PTS_QUIZ;
+    touchStreak(); save();
+  } else {
+    btns.forEach(b => {
+      const txt = b.textContent;
+      const chosenTxt = deToPs ? c.items[chosen].ps : c.items[chosen].de;
+      if (txt === chosenTxt) b.classList.add('bad');
+    });
+  }
+  document.getElementById('qsay').textContent = 'تلفظ: ' + w.say;
+  speak(w.de);
+  updateHeader();
+  setTimeout(() => { quiz.pos += 1; showQuestion(); }, 1400);
+}
+
+function quizResult() {
+  const q = quiz, c = q.cat;
+  const pct = Math.round((q.correct / q.order.length) * 100);
+  const stars = pct >= 90 ? '⭐⭐⭐' : pct >= 70 ? '⭐⭐' : pct >= 50 ? '⭐' : '💪';
+  const prev = state.quizBest[c.id] || 0;
+  if (pct > prev) state.quizBest[c.id] = pct;
+  save();
+  if (pct >= 70) hearts(pct >= 90 ? 28 : 16);
+
+  app.innerHTML =
+    '<div class="result">' +
+      '<div class="stars-row">' + stars + '</div>' +
+      '<h2>' + q.correct + ' von ' + q.order.length + ' richtig!</h2>' +
+      '<div class="ps">' + (pct >= 90 ? 'شاباس رویا جانې! ډېره تکړه یې! 🌸' : pct >= 70 ? 'ډېره ښه! نږدې بشپړ! 👏' : pct >= 50 ? 'ښه هڅه! بیا یې تمرین کړه 💪' : 'پروا نلري — بیا هڅه وکړه، ته یې کولی شې! 🤍') + '</div>' +
+      '<div class="pts">+' + (q.correct * PTS_QUIZ) + ' ⭐ Punkte</div>' +
+      (pct > prev ? '<div style="font-size:13px;color:var(--green)">🎖 نوی ریکارډ · Neuer Rekord: ' + pct + '%</div>' : '') +
+      '<button class="bigbtn" onclick="startQuiz(\'' + c.id + '\')">🔁 بیا ازموینه · Nochmal</button>' +
+      '<button class="bigbtn ghost" onclick="goCat(\'' + c.id + '\')">‹ بېرته برخې ته</button>' +
+    '</div>';
+  updateHeader();
+}
+
+/* ---------------- Fortschritt (für Schatzi 😉) ---------------- */
+function goProgress() {
+  view = 'progress'; setTabs(); updateHeader();
+  const tot = totalItems(), n = learnedTotal();
+  const pct = tot ? Math.round((n / tot) * 100) : 0;
+  const lv = level();
+
+  let rows = '';
+  for (const c of CATS) {
+    const cn = learnedIn(c), ct = c.items.length;
+    const cp = Math.round((cn / ct) * 100);
+    const best = state.quizBest[c.id];
+    rows +=
+      '<div class="prog-row">' +
+        '<div class="ic">' + c.ic + '</div>' +
+        '<div class="mid"><div class="nm">' + c.de + (cn === ct ? ' 🏆' : '') + '</div>' +
+        '<div class="bar' + (cn === ct ? ' gold' : '') + '"><i style="width:' + cp + '%"></i></div></div>' +
+        '<div class="num">' + cn + '/' + ct + (best ? '<br>Quiz ' + best + '%' : '') + '</div>' +
+      '</div>';
+  }
+
+  app.innerHTML =
+    '<div class="section-title"><b>📊 Fortschritt</b><span>د رویا پرمختګ</span></div>' +
+    '<div class="prog-hero">' +
+      '<div class="pct">' + pct + '%</div>' +
+      '<div class="sub">' + n + ' von ' + tot + ' Wörtern & Sätzen gelernt</div>' +
+      '<div class="sub">' + lv.ic + ' Level: ' + lv.de + ' · ⭐ ' + state.points + ' Punkte · 🔥 ' + state.streak + ' Tage</div>' +
+      '<div class="sub" style="margin-top:4px">Zuletzt aktiv: ' + (state.lastDay || '—') + '</div>' +
+    '</div>' +
+    '<div class="section-title"><b>Kategorien</b><span>برخې</span></div>' +
+    rows +
+    '<button class="bigbtn" onclick="shareProgress()">📤 Fortschritt senden · پرمختګ ولېږئ</button>' +
+    '<div class="footnote">Der Fortschritt wird auf diesem Gerät gespeichert.<br>' +
+    '<a href="#" onclick="resetAll();return false" style="color:var(--softer)">Zurücksetzen</a></div>';
+  window.scrollTo(0, 0);
+}
+
+function shareProgress() {
+  const tot = totalItems(), n = learnedTotal();
+  const pct = tot ? Math.round((n / tot) * 100) : 0;
+  const lv = level();
+  let done = CATS.filter(c => learnedIn(c) === c.items.length).map(c => c.de).join(', ');
+  const text =
+    '🌸 Deutsch-Fortschritt von Roya\n' +
+    '✅ ' + n + ' von ' + tot + ' Wörtern gelernt (' + pct + '%)\n' +
+    '⭐ ' + state.points + ' Punkte · Level: ' + lv.de + ' ' + lv.ic + '\n' +
+    '🔥 ' + state.streak + ' Tage in Folge\n' +
+    (done ? '🏆 Fertig: ' + done + '\n' : '') +
+    '💌 Ich vermisse dich!';
+  if (navigator.share) {
+    navigator.share({ text: text }).catch(function () {});
+  } else {
+    window.open('https://wa.me/?text=' + encodeURIComponent(text));
+  }
+}
+
+function resetAll() {
+  if (confirm('Wirklich alles zurücksetzen? / ټول پرمختګ له منځه ځي — ډاډه یاست؟')) {
+    localStorage.removeItem(KEY);
+    state = load();
+    goHome();
+  }
+}
+
+/* ---------------- Effekte ---------------- */
+function toast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+}
+
+function hearts(n) {
+  const emo = ['🤍', '💖', '🌸', '⭐', '💙'];
+  for (let i = 0; i < n; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-fx';
+    h.textContent = emo[Math.floor(Math.random() * emo.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (14 + Math.random() * 18) + 'px';
+    h.style.animationDuration = (2.2 + Math.random() * 2) + 's';
+    h.style.animationDelay = (Math.random() * 0.6) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }
+}
+
+/* ---------------- Blüten + Start ---------------- */
+(function () {
+  const wrap = document.getElementById('stars');
+  for (let i = 0; i < 34; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 100 + '%';
+    s.style.animationDelay = Math.random() * 4 + 's';
+    wrap.appendChild(s);
+  }
+})();
+
+goHome();
+</script>
+
+</body>
+</html>

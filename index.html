@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#fff5f8">
+<title>Für Roya 🤍</title>
+<style>
+  :root {
+    --bg1: #faf9f7;
+    --bg2: #fff5f8;
+    --text: #2b2b3a;
+    --soft: rgba(43, 43, 58, 0.6);
+    --accent: #e75a7c;
+    --blue: #3d8fb5;
+    --card: #ffffff;
+    --card-border: #f0e6ea;
+    --shadow: 0 4px 20px rgba(190, 140, 160, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg1) 70%) fixed;
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+    padding: 24px calc(env(safe-area-inset-right) + 20px) calc(env(safe-area-inset-bottom) + 24px) calc(env(safe-area-inset-left) + 20px);
+    -webkit-font-smoothing: antialiased;
+  }
+  .box { max-width: 400px; width: 100%; text-align: center; }
+  .flower { font-size: 34px; }
+  h1 {
+    font-family: "Snell Roundhand", "Savoye LET", "Brush Script MT", cursive;
+    font-size: 34px; font-weight: 400; color: var(--accent);
+    text-shadow: 0 1px 12px rgba(231, 90, 124, 0.2);
+    margin: 6px 0 4px;
+  }
+  .sub { font-size: 14px; color: var(--soft); direction: rtl; margin-bottom: 30px; }
+  a.app {
+    display: flex; align-items: center; gap: 16px; text-align: left;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 20px; padding: 20px; margin-bottom: 14px;
+    box-shadow: var(--shadow); text-decoration: none; color: var(--text);
+    transition: transform 0.15s ease;
+  }
+  a.app:active { transform: scale(0.97); }
+  a.app .ic { font-size: 34px; }
+  a.app .t { font-size: 17px; font-weight: 700; }
+  a.app .d { font-size: 13px; color: var(--soft); margin-top: 3px; }
+  a.app .arrow { margin-left: auto; color: var(--accent); font-size: 20px; }
+  .hint { font-size: 12px; color: var(--soft); margin-top: 26px; line-height: 1.6; }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="flower">🌸</div>
+    <h1>Für Roya</h1>
+    <div class="sub">رویا جانې، دا ستا لپاره دي 🤍</div>
+
+    <a class="app" href="deutsch-fuer-roya.html">
+      <span class="ic">📖</span>
+      <span>
+        <span class="t">Deutsch lernen</span>
+        <span class="d" style="display:block">الماني زده کړه — د لغتونو، ازموینې او امتیازونو سره</span>
+      </span>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="app" href="countdown.html">
+      <span class="ic">🤍</span>
+      <span>
+        <span class="t">Unser Countdown</span>
+        <span class="d" style="display:block">بیا سره لیدل او زموږ کوچنی ماشوم</span>
+      </span>
+      <span class="arrow">›</span>
+    </a>
+
+    <div class="hint">
+      Tipp: In Safari unten auf <b>Teilen</b> tippen →<br>
+      <b>„Zum Home-Bildschirm“</b> — dann hast du ein App-Icon 🌸
+    </div>
+  </div>
+</body>
+</html>
