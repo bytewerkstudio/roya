@@ -53,27 +53,6 @@
   a.app .t { font-size: 17px; font-weight: 700; }
   a.app .d { font-size: 13px; color: var(--soft); margin-top: 3px; }
   a.app .arrow { margin-left: auto; color: var(--accent); font-size: 20px; }
-  .hint-card {
-    margin-top: 26px; text-align: right; direction: rtl;
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 18px; padding: 16px 18px; box-shadow: var(--shadow);
-  }
-  .hint-title { font-size: 15px; font-weight: 700; color: var(--accent); margin-bottom: 10px; }
-  .steps { list-style: none; counter-reset: st; }
-  .steps li {
-    counter-increment: st; position: relative;
-    padding: 7px 34px 7px 0; font-size: 13.5px; color: var(--text); line-height: 1.7;
-  }
-  .steps li::before {
-    content: counter(st);
-    position: absolute; right: 0; top: 9px;
-    width: 22px; height: 22px; border-radius: 50%;
-    background: var(--accent); color: #fff;
-    font-size: 12px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .steps .ltr { direction: ltr; unicode-bidi: embed; }
-  .steps b { color: var(--blue); }
 </style>
 </head>
 <body>
@@ -109,15 +88,6 @@
       <span class="arrow">›</span>
     </a>
 
-    <div class="hint-card">
-      <div class="hint-title">📲 دا پاڼه د اپ په څېر خوندي کړه</div>
-      <ol class="steps">
-        <li>په Safari کې لاندې د <b>شریکولو تڼۍ</b> کېکاږه — <span class="ltr">(⬆️ Share / Teilen)</span></li>
-        <li>لږ ښکته ولاړه شه او دا غوره کړه: <span class="ltr"><b>"Add to Home Screen"</b></span> <span class="ltr">(„Zum Home-Bildschirm“)</span></li>
-        <li>پورته ښي خوا کې <span class="ltr"><b>"Add"</b></span> <span class="ltr">(„Hinzufügen“)</span> کېکاږه</li>
-        <li>بشپړ شو! اوس دې په سکرین کې د 🌸 اپ نښه ده — هره ورځ يې خلاصوه 🤍</li>
-      </ol>
-    </div>
   </div>
 <script>
   // Offline-Modus: Seiten nach dem ersten Besuch auch ohne Internet nutzbar
