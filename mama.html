@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ps" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#fff5f8">
+<meta name="apple-mobile-web-app-title" content="Mama 🤍">
+<link rel="apple-touch-icon" href="icon-mama.png">
+<link rel="icon" href="icon-mama.png">
+<title>د مور روغتیا 🤍</title>
+<style>
+  :root {
+    --bg1: #faf9f7;
+    --bg2: #fff5f8;
+    --text: #2b2b3a;
+    --soft: rgba(43, 43, 58, 0.62);
+    --softer: rgba(43, 43, 58, 0.42);
+    --accent: #e75a7c;
+    --accent-soft: rgba(231, 90, 124, 0.08);
+    --blue: #3d8fb5;
+    --blue-soft: rgba(61, 143, 181, 0.10);
+    --green: #3f9d63;
+    --green-soft: rgba(63, 157, 99, 0.08);
+    --red: #d95757;
+    --red-soft: rgba(217, 87, 87, 0.07);
+    --gold: #c8901f;
+    --card: #ffffff;
+    --card-border: #f0e6ea;
+    --line: rgba(0, 0, 0, 0.08);
+    --shadow: 0 2px 14px rgba(190, 140, 160, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { min-height: 100%; overflow-x: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg1);
+    background: radial-gradient(120% 120% at 50% 0%, var(--bg2) 0%, var(--bg1) 70%) fixed;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  #wrap {
+    max-width: 430px; margin: 0 auto;
+    padding: calc(env(safe-area-inset-top) + 14px) 18px calc(env(safe-area-inset-bottom) + 40px);
+  }
+
+  .backrow { margin-bottom: 8px; }
+  .backbtn {
+    display: inline-block; border: 1px solid var(--card-border); background: var(--card);
+    color: var(--text); border-radius: 100px; padding: 8px 16px; font-size: 14px;
+    text-decoration: none; box-shadow: var(--shadow);
+  }
+
+  .brand { text-align: center; margin-bottom: 14px; }
+  .brand h1 {
+    font-family: "Snell Roundhand", "Savoye LET", "Brush Script MT", cursive;
+    font-size: 30px; font-weight: 400; color: var(--accent);
+    text-shadow: 0 1px 12px rgba(231, 90, 124, 0.2);
+    direction: ltr;
+  }
+  .brand .ps { font-size: 14px; color: var(--soft); margin-top: 2px; }
+
+  /* ---------- Tabs ---------- */
+  .tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+  .tabs button {
+    flex: 1; padding: 11px 4px; border-radius: 100px; font-size: 13.5px; cursor: pointer;
+    border: 1px solid var(--card-border); background: var(--card); color: var(--soft);
+    box-shadow: var(--shadow);
+  }
+  .tabs button.active {
+    background: var(--accent-soft); border-color: rgba(231, 90, 124, 0.4);
+    color: var(--accent); font-weight: 700;
+  }
+
+  .panel { display: none; }
+  .panel.on { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 20px;
+    padding: 18px; box-shadow: var(--shadow); margin-bottom: 12px;
+  }
+  .card h2 { font-size: 16.5px; margin-bottom: 4px; }
+  .card .sub { font-size: 12.5px; color: var(--softer); margin-bottom: 12px; }
+
+  /* ---------- Wasser ---------- */
+  .water-count { text-align: center; margin: 6px 0 14px; }
+  .water-count .big { font-size: 44px; font-weight: 700; color: var(--blue); }
+  .water-count .lbl { font-size: 13px; color: var(--soft); margin-top: 2px; }
+  .glasses { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .glass {
+    aspect-ratio: 1; border-radius: 16px; font-size: 30px; cursor: pointer;
+    border: 1.5px dashed rgba(61, 143, 181, 0.4); background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s ease; color: rgba(61, 143, 181, 0.35);
+  }
+  .glass.full {
+    border: 1.5px solid var(--blue); background: var(--blue-soft);
+    color: var(--blue); transform: scale(1.03);
+  }
+  .water-msg {
+    margin-top: 14px; text-align: center; padding: 11px 14px; border-radius: 14px;
+    font-size: 14px; font-weight: 600; color: var(--blue);
+    background: var(--blue-soft); border: 1px solid rgba(61, 143, 181, 0.25);
+  }
+  .water-msg.done { color: var(--green); background: var(--green-soft); border-color: rgba(63, 157, 99, 0.3); }
+  .water-bar { height: 6px; border-radius: 6px; background: var(--line); overflow: hidden; margin-top: 14px; }
+  .water-bar i {
+    display: block; height: 100%; border-radius: 6px;
+    background: linear-gradient(270deg, var(--blue), #7fc0dd);
+    transition: width 0.4s ease;
+  }
+
+  /* ---------- Essen ---------- */
+  .food {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 12px; border-radius: 14px; margin-bottom: 8px; font-size: 14px; line-height: 1.65;
+  }
+  .food .em { font-size: 22px; flex: 0 0 auto; margin-top: 1px; }
+  .food.good { background: var(--green-soft); border-right: 3px solid var(--green); }
+  .food.bad  { background: var(--red-soft);  border-right: 3px solid var(--red); }
+  .food b { display: block; }
+  .food span { color: var(--soft); font-size: 12.5px; }
+  .food-head { display: flex; align-items: center; gap: 8px; margin: 4px 0 12px; font-size: 16px; font-weight: 700; }
+  .food-head.g { color: var(--green); }
+  .food-head.b { color: var(--red); }
+
+  /* ---------- Tipps ---------- */
+  details {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 18px;
+    box-shadow: var(--shadow); margin-bottom: 10px; overflow: hidden;
+  }
+  summary {
+    list-style: none; cursor: pointer; padding: 15px 16px;
+    font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 10px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .em { font-size: 21px; }
+  summary::after { content: "‹"; margin-right: auto; color: var(--softer); font-size: 18px; transform: rotate(-90deg); transition: transform 0.2s; }
+  details[open] summary::after { transform: rotate(90deg); }
+  .tip-body { padding: 0 16px 14px; }
+  .tip-body li {
+    list-style: none; position: relative; padding: 6px 26px 6px 0;
+    font-size: 14px; line-height: 1.7; color: var(--text);
+  }
+  .tip-body li::before { content: "🌸"; position: absolute; right: 0; top: 7px; font-size: 12px; }
+  details.warn summary { color: var(--red); }
+  details.warn .tip-body li::before { content: "❗"; }
+  .warn-note {
+    margin: 8px 0 2px; padding: 10px 14px; border-radius: 12px; font-size: 13.5px; font-weight: 700;
+    background: var(--red-soft); border: 1px solid rgba(217, 87, 87, 0.3); color: var(--red); text-align: center;
+  }
+
+  .footnote { text-align: center; font-size: 11.5px; color: var(--softer); margin-top: 22px; line-height: 1.7; }
+
+  .heart-fx { position: fixed; top: -40px; z-index: 20; pointer-events: none; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(300deg); opacity: 0.2; } }
+</style>
+</head>
+<body>
+
+<div id="wrap">
+  <div class="backrow"><a class="backbtn" href="index.html">‹ Roya</a></div>
+
+  <div class="brand">
+    <h1>Für Mama</h1>
+    <div class="ps">مورجانې، دا ستا او د کوچني د روغتیا ملګرې ده 🤍</div>
+  </div>
+
+  <div class="tabs">
+    <button id="tb0" class="active" onclick="tab(0)">💧 اوبه</button>
+    <button id="tb1" onclick="tab(1)">🥗 خواړه</button>
+    <button id="tb2" onclick="tab(2)">🌸 لارښوونې</button>
+  </div>
+
+  <!-- ================= اوبه ================= -->
+  <section class="panel on" id="p0">
+    <div class="card">
+      <h2>💧 نن دې څومره اوبه وڅښلې؟</h2>
+      <div class="sub">هر ګیلاس ≈ ۲۵۰ ملي لیتره — موخه: ۸ ګیلاسه (۲ لیتره) په ورځ کې</div>
+      <div class="water-count">
+        <div class="big" id="wBig">۰ / ۸</div>
+        <div class="lbl" id="wMl">۰ ملي لیتره</div>
+      </div>
+      <div class="glasses" id="glasses"></div>
+      <div class="water-bar"><i id="wBar" style="width:0%"></i></div>
+      <div class="water-msg" id="wMsg"></div>
+    </div>
+    <div class="card">
+      <h2>☝️ ولې اوبه دومره مهمې دي؟</h2>
+      <div class="tip-body" style="padding:6px 0 0">
+        <li>د ماشوم د اوبو کڅوړه تازه ساتي</li>
+        <li>د قبضیت او د ادرار له انتاناتو مخنیوی کوي</li>
+        <li>ستړیا او سردرد کموي</li>
+        <li>که ادرار دې تک ژېړ وي، ډېرې اوبه وڅښه!</li>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= خواړه ================= -->
+  <section class="panel" id="p1">
+    <div class="card">
+      <div class="food-head g">✅ ګټور خواړه — هره ورځ</div>
+      <div class="food good"><span class="em">🥛</span><div><b>شیدې او ماستې</b><span>کلسیم — د ماشوم د هډوکو لپاره</span></div></div>
+      <div class="food good"><span class="em">🥚</span><div><b>ښې پخې هګۍ</b><span>پروټین — خو اومې هېڅکله نه!</span></div></div>
+      <div class="food good"><span class="em">🍗</span><div><b>ښه پخه غوښه</b><span>اوسپنه او پروټین</span></div></div>
+      <div class="food good"><span class="em">🥬</span><div><b>شنه سابه (پالک)</b><span>فولیک اسید او اوسپنه</span></div></div>
+      <div class="food good"><span class="em">🍎</span><div><b>تازه مېوې</b><span>مخکې له خوړلو یې ښې ووینځه</span></div></div>
+      <div class="food good"><span class="em">🫘</span><div><b>دال او لوبیا</b><span>پروټین او فایبر</span></div></div>
+      <div class="food good"><span class="em">🌰</span><div><b>چهارمغز او بادام</b><span>د ماشوم د ماغزو لپاره ګټور غوړ</span></div></div>
+      <div class="food good"><span class="em">🍞</span><div><b>د غنمو ډوډۍ</b><span>اوږدمهاله انرژي</span></div></div>
+      <div class="food good"><span class="em">🍊</span><div><b>مالټه او لیمو</b><span>ویټامین C — له اوسپنیزو خوړو سره یې وخوره، اوسپنه ښه جذبوي</span></div></div>
+      <div class="food good"><span class="em">🐟</span><div><b>پخه کب — اونۍ کې ۱–۲ ځله</b><span>د ماشوم د ماغزو ودې لپاره</span></div></div>
+    </div>
+
+    <div class="card">
+      <div class="food-head b">⚠️ له دې خوړو ډډه وکړه</div>
+      <div class="food bad"><span class="em">🥩</span><div><b>اومه یا نیمه پخه غوښه</b><span>د میکروبونو خطر — غوښه باید ښه پخه وي</span></div></div>
+      <div class="food bad"><span class="em">🍳</span><div><b>اومې هګۍ</b><span>ژېړه یې باید کلکه پخه وي</span></div></div>
+      <div class="food bad"><span class="em">🥛</span><div><b>جوش نه شوې شیدې</b><span>شیدې تل وایشوه (جوش کړه)</span></div></div>
+      <div class="food bad"><span class="em">🫀</span><div><b>ډېر ځیګر (جګر)</b><span>ډېر ویټامین A ماشوم ته زیان رسوي</span></div></div>
+      <div class="food bad"><span class="em">☕</span><div><b>ډېر چای او قهوه</b><span>په ورځ کې تر ۱–۲ پیالو زیات نه — او له ډوډۍ سره یې مه څښه</span></div></div>
+      <div class="food bad"><span class="em">🥤</span><div><b>انرژي څښاک او ګازلرونکي څښاک</b><span>ډېره بوره او کافین لري</span></div></div>
+      <div class="food bad"><span class="em">🍬</span><div><b>ډېره بوره او خواږه</b><span>د شکرې خطر زیاتوي</span></div></div>
+      <div class="food bad"><span class="em">🧂</span><div><b>ډېره مالګه</b><span>د لاسونو او پښو پړسوب زیاتوي</span></div></div>
+      <div class="food bad"><span class="em">🌿</span><div><b>بوټي او درمل بې له ډاکټره</b><span>هر درمل لومړی له ډاکټر سره وګوره</span></div></div>
+      <div class="food bad"><span class="em">🚭</span><div><b>سګرټ، چیلم او نسوار — بېخي بند!</b><span>له دود څخه هم ځان لرې ساته</span></div></div>
+    </div>
+  </section>
+
+  <!-- ================= لارښوونې ================= -->
+  <section class="panel" id="p2">
+    <details open>
+      <summary><span class="em">😴</span> ویده کېدل او ارام</summary>
+      <div class="tip-body">
+        <li>پر <b>کیڼ اړخ</b> ویده کېږه — ماشوم ته وینه او اکسیجن ښه رسېږي</li>
+        <li>د زنګنونو تر منځ بالښت کېږده — ملا دې ارامېږي</li>
+        <li>په وروستیو میاشتو کې پر شا (ملا) ډېر مه څملې</li>
+        <li>په ورځ کې لږ تر لږه یو ځل ارام وکړه، ځان مه ستړې کوه</li>
+        <li>شپه کې ۷–۹ ساعته خوب وکړه</li>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="em">🚶‍♀️</span> خوځښت او حرکت</summary>
+      <div class="tip-body">
+        <li>هره ورځ <b>۲۰–۳۰ دقیقې</b> ورو قدم ووهه — تر ټولو ښه ورزش دی</li>
+        <li>درانه شیان مه پورته کوه</li>
+        <li>سخت کورني کارونه پرېږده — کورنۍ دې مرسته وکړي</li>
+        <li>که ستړې شوې یا ساه دې بنده شوه، سمدلاسه ارام وکړه</li>
+        <li>ورو نرمښت (سټرېچ) د ملا درد کموي</li>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="em">🍽</span> د خوړلو عادتونه</summary>
+      <div class="tip-body">
+        <li>په ورځ کې <b>۵–۶ ځله لږ لږ</b> وخوره — نه ۲ ځله ډېر</li>
+        <li>سهارنۍ هېڅکله مه پرېږده</li>
+        <li>چای له ډوډۍ سره مه څښه — اوسپنه نه پرېږدي چې جذب شي؛ ۱ ساعت وروسته یې وڅښه</li>
+        <li>اوسپنیز خواړه (پالک، غوښه، دال) د مالټې سره وخوره</li>
+        <li>هغه ویټامینونه چې ډاکټر درکړي، هره ورځ یې وخوره</li>
+        <li>«د دوو لپاره خوړل» اړین نه دي — کیفیت مهم دی، نه مقدار</li>
+      </div>
+    </details>
+
+    <details class="warn">
+      <summary><span class="em">⚠️</span> دا نښې = سمدلاسه ډاکټر ته!</summary>
+      <div class="tip-body">
+        <li>وینه راتلل</li>
+        <li>په ګېډه کې سخت او نه تېرېدونکی درد</li>
+        <li>سخت سردرد یا د سترګو تیاره / برېښ لیدل</li>
+        <li>ماشوم له معمول څخه ډېر لږ خوځېږي یا هېڅ نه خوځېږي</li>
+        <li>تبه</li>
+        <li>د مخ او لاسونو ناڅاپي پړسوب</li>
+        <li>اوبه راتلل (د اوبو کڅوړه شلېدل)</li>
+      </div>
+      <div class="warn-note" style="margin:0 16px 14px">دا نښې مه څارئ او مه انتظار کوئ — سمدلاسه روغتون ته ورشه! 🏥</div>
+    </details>
+
+    <details>
+      <summary><span class="em">🤍</span> د زړه ارامي</summary>
+      <div class="tip-body">
+        <li>له ماشوم سره خبرې وکړه — ستا غږ اوري او پېژني یې</li>
+        <li>کله چې اندېښنه لرې، ورو او ژوره ساه واخله</li>
+        <li>دعا، تلاوت یا ارام غږونه — هر څه چې زړه دې اراموي</li>
+        <li>له مور، خور یا ښې ملګرې سره خبرې وکړه</li>
+        <li>ښکلي فکرونه کوه — ډېر ژر به دې کوچنی په غېږ کې وي 🤍</li>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="em">🎒</span> د روغتون کڅوړه (له ۳۶ اونۍ مخکې)</summary>
+      <div class="tip-body">
+        <li>تذکره او ټول اسناد</li>
+        <li>د ځان لپاره ارامې جامې، څپلۍ او د حفظ الصحې شیان</li>
+        <li>د ماشوم لپاره جامې، خولۍ، کمپله او پمپرز</li>
+        <li>د اوبو بوتل او لږ وچ خواړه</li>
+        <li>تلیفون او چارجر</li>
+      </div>
+    </details>
+  </section>
+
+  <div class="footnote">
+    دا عمومي لارښوونې دي — د ډاکټر خبره تل لومړی ځای لري 🤍
+  </div>
+</div>
+
+<script>
+/* ---------------- Tabs ---------------- */
+function tab(i) {
+  for (let k = 0; k < 3; k++) {
+    document.getElementById('tb' + k).className = (k === i) ? 'active' : '';
+    document.getElementById('p' + k).className = (k === i) ? 'panel on' : 'panel';
+  }
+  window.scrollTo(0, 0);
+}
+
+/* ---------------- Wasser-Tracker ---------------- */
+const WKEY = 'mamaWasserV1';
+const GOAL = 8;
+
+function toPs(n) {
+  const d = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  return String(n).split('').map(c => /\d/.test(c) ? d[+c] : c).join('');
+}
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+}
+function loadWater() {
+  try {
+    const s = JSON.parse(localStorage.getItem(WKEY));
+    if (s && s.day === todayStr()) return s;
+  } catch (e) {}
+  return { day: todayStr(), cups: 0, praised: false };
+}
+let water = loadWater();
+function saveWater() { localStorage.setItem(WKEY, JSON.stringify(water)); }
+
+function setCups(n) {
+  water = loadWater();               // neuer Tag? -> zurücksetzen
+  water.cups = (n === water.cups) ? n - 1 : n;
+  if (water.cups < 0) water.cups = 0;
+  if (water.cups >= GOAL && !water.praised) {
+    water.praised = true;
+    hearts(20);
+  }
+  saveWater();
+  renderWater();
+}
+
+function renderWater() {
+  water = loadWater();
+  const g = document.getElementById('glasses');
+  let html = '';
+  for (let i = 1; i <= GOAL; i++) {
+    html += '<button class="glass' + (i <= water.cups ? ' full' : '') + '" onclick="setCups(' + i + ')">' +
+      (i <= water.cups ? '💧' : '🥛') + '</button>';
+  }
+  g.innerHTML = html;
+  document.getElementById('wBig').textContent = toPs(water.cups) + ' / ' + toPs(GOAL);
+  document.getElementById('wMl').textContent = toPs(water.cups * 250) + ' ملي لیتره';
+  document.getElementById('wBar').style.width = Math.min(100, (water.cups / GOAL) * 100) + '%';
+  const m = document.getElementById('wMsg');
+  if (water.cups >= GOAL) {
+    m.className = 'water-msg done';
+    m.textContent = '🎉 شاباس مورجانې! نن دې موخه بشپړه کړه — ماشوم دې خوشحاله دی 🤍';
+  } else if (water.cups >= GOAL / 2) {
+    m.className = 'water-msg';
+    m.textContent = '💪 ډېره ښه! نور ' + toPs(GOAL - water.cups) + ' ګیلاسه پاتې دي';
+  } else {
+    m.className = 'water-msg';
+    m.textContent = 'هر ګیلاس چې وڅښې، دلته یې کېکاږه 💧';
+  }
+}
+
+/* ---------------- Herzchen ---------------- */
+function hearts(n) {
+  const emo = ['🤍', '💧', '🌸', '⭐', '💙'];
+  for (let i = 0; i < n; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart-fx';
+    h.textContent = emo[Math.floor(Math.random() * emo.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (14 + Math.random() * 18) + 'px';
+    h.style.animationDuration = (2.2 + Math.random() * 2) + 's';
+    h.style.animationDelay = (Math.random() * 0.6) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 5000);
+  }
+}
+
+renderWater();
+document.addEventListener('visibilitychange', function () { if (!document.hidden) renderWater(); });
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(function () {});
+  let swReloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
+    if (!swReloaded) { swReloaded = true; location.reload(); }
+  });
+}
+</script>
+
+</body>
+</html>
